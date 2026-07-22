@@ -1,197 +1,3068 @@
-EduQuest is a gamified learning platform that helps students learn coding, languages, STEM subjects, and improve their knowledge through interactive lessons, quizzes, challenges, progress tracking, and an AI learning assistant.
-
-
-# EduQuest – Gamified Learning Platform 🎓
-
-EduQuest is a gamified education platform designed to make learning more interactive, engaging, and enjoyable for students.
-
-The main idea behind this project is to combine learning with game-like features such as XP points, coins, badges, certificates, leaderboards, quizzes, and progress tracking. Instead of just reading lessons, students can interact with different learning activities and track their progress.
-
-## What EduQuest Offers
-
-EduQuest includes different learning sections for students:
-
-* 💻 Coding
-* 🌍 Languages
-* 🎯 Quizzes
-* 🔬 STEM Subjects
-
-The platform also includes a dashboard where users can view their progress, XP, coins, badges, certificates, leaderboard position, and learning statistics.
-
-## Main Features
-
-### 🔐 Login and Profile Setup
-
-Users can log in using their email and OTP verification. After logging in, they can create their profile by selecting their role as a student or teacher.
-
-Students can select their grade or engineering year, while teachers can enter the subject they teach.
-
-### 💻 Coding Learning
-
-The coding section provides learning content and quizzes for languages such as:
-
-* C
-* C++
-* Python
-* Java
-
-Users can learn basic programming concepts and answer questions to earn XP and coins.
-
-The platform also includes a mock compiler interface where users can select a programming language, write code, and view simulated terminal output.
-
-### 🌍 Language Learning
-
-Users can learn the basics of different languages, including:
-
-* Spanish
-* French
-* German
-* Mandarin
-* Japanese
-
-Each language includes concepts, learning roadmaps, and interactive questions.
-
-### 🔬 STEM Learning
-
-The STEM section includes subjects such as:
-
-* Engineering Mathematics
-* Engineering Physics
-* Engineering Chemistry
-* Core Mechanics
-
-Each topic provides important concepts, formulas, learning guidance, and questions.
-
-### 🎯 Quizzes and Mini-Games
-
-EduQuest includes different quiz modes for students and teachers. It also includes interactive quiz activities and mini-games that make learning more engaging.
-
-### 🤖 AI Learning Assistant
-
-The platform includes an EduQuest Assistant chatbot that helps users with learning-related questions.
-
-Students can ask questions related to topics such as:
-
-* Mathematics
-* C++
-* Languages
-* General learning topics
-
-### 🏆 Gamification
-
-To make learning more interesting, EduQuest uses gamification features such as:
-
-* ⭐ XP points
-* 💰 Coins
-* 🔥 Learning streaks
-* 🏆 Leaderboards
-* 🎖️ Badges
-* 🎓 Certificates
-* 📊 Performance tracking
-
-Users can unlock badges and certificates by completing different learning activities.
-
-### 📊 Student Dashboard
-
-The dashboard allows users to view:
-
-* Current XP
-* Coins
-* Learning streak
-* Number of completed quizzes
-* Earned badges
-* Exam performance
-* Leaderboard position
-* Doubts and discussions
-
-### 💬 Doubts and Discussions
-
-Students can post their doubts and interact with discussions. This creates a simple learning environment where students can ask questions and share knowledge.
-
-### 📄 Resume Builder
-
-The platform also includes a basic resume builder where students can enter their technical skills and major projects to generate a resume preview.
-
-### 💼 Placement Preparation
-
-EduQuest also provides placement preparation features including:
-
-* Aptitude questions
-* Technical interview questions
-* Basic OOP and C++ interview concepts
-* Resume generation
-
-## Technologies Used
-
-* HTML5
-* CSS3
-* JavaScript
-* DOM Manipulation
-* EmailJS
-* Responsive Web Design
-
-The project also includes simulated database interactions with MongoDB and Supabase concepts for organizing learning content and application data.
-
-## Project Structure
-
-```text
-EduQuest/
-│
-├── index.html
-├── styles.css
-├── app.js
-└── README.md
-```
-
-## How to Run the Project
-
-1. Clone this repository.
-
-```bash
-git clone https://github.com/your-username/your-repository-name.git
-```
-
-2. Open the project folder.
-
-3. Open `index.html` in your browser.
-
-For the best experience, you can use the Live Server extension in Visual Studio Code.
-
-## Future Improvements
-
-Some features that can be added in the future include:
-
-* Real backend database integration
-* Secure user authentication
-* Real-time multiplayer quizzes
-* AI-powered personalized learning paths
-* Real online code execution
-* PDF resume download
-* Advanced student analytics
-* Mobile application
-* Teacher course management
-* Real-time discussion and collaboration
-
-## About the Project
-
-This project was created as a learning project to explore web development, gamification, interactive user interfaces, and educational technology.
-
-The goal of EduQuest is to make learning more engaging by combining education with interactive features and game-based progress systems.
-
-## Author
-
-**David Raj Boddu**
-
-B.Tech Student | Software Development Enthusiast
-
-Interested in:
-
-* Programming
-* Web Development
-* Backend Development
-* Cybersecurity
-* Artificial Intelligence
-
-## License
-
-This project is licensed under the MIT License.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduQuest - Gamified Learning</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- SPLASH SCREEN -->
+        <div id="splash" class="page active">
+            <h1 class="logo-title pulse">Gamified Education</h1>
+            <p class="subtitle fade-in">Welcome to EduQuest</p>
+        </div>
+
+        <!-- LOGIN SCREEN -->
+        <div id="login" class="page">
+            <div class="glass-card">
+                <h2>Login to EduQuest</h2>
+                
+                <!-- Email Form -->
+                <form id="email-form">
+                    <p>Enter your email to continue</p>
+                    <div class="input-group">
+                        <input type="email" id="email-input" placeholder="student@example.com" required />
+                    </div>
+                    <button type="submit" class="btn primary glowing-btn">Submit</button>
+                </form>
+
+                <!-- OTP Form (Hidden Initially) -->
+                <form id="otp-form" class="hidden">
+                    <p>Enter the 4-digit OTP sent to your email.</p>
+                    <div class="input-group">
+                        <input type="text" id="otp-input" placeholder="1234" maxlength="4" required />
+                    </div>
+                    <button type="submit" class="btn primary glowing-btn">Verify OTP</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- PROFILE SETUP -->
+        <div id="profile-setup" class="page">
+            <div class="glass-card">
+                <h2>Setup Your Profile</h2>
+                <p>Customize your EduQuest avatar identity</p>
+                <form id="profile-form">
+                    
+                    <div class="input-group">
+                        <label>Select Your Role</label>
+                        <div class="role-options" style="display: flex; gap: 1rem; align-items: center; margin-top: 0.5rem;">
+                            <label style="cursor: pointer;"><input type="radio" name="role" value="student" checked> Student</label>
+                            <label style="cursor: pointer;"><input type="radio" name="role" value="teacher"> Teacher</label>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="name-input">Full Name</label>
+                        <input type="text" id="name-input" placeholder="e.g. Alex Johnson" required />
+                    </div>
+
+                    <!-- Student Specific -->
+                    <div class="input-group" id="student-fields">
+                        <label for="standard-input">Standard / Year</label>
+                        <select id="standard-input">
+                            <option value="">Select your Grade/Year</option>
+                            <option value="6th Grade">6th Grade</option>
+                            <option value="7th Grade">7th Grade</option>
+                            <option value="8th Grade">8th Grade</option>
+                            <option value="9th Grade">9th Grade</option>
+                            <option value="10th Grade">10th Grade</option>
+                            <option value="11th Grade">11th Grade</option>
+                            <option value="12th Grade">12th Grade</option>
+                            <option value="Engineering 1st Year">Engineering 1st Year</option>
+                            <option value="Engineering 2nd Year">Engineering 2nd Year</option>
+                            <option value="Engineering 3rd Year">Engineering 3rd Year</option>
+                            <option value="Engineering 4th Year">Engineering 4th Year</option>
+                        </select>
+                    </div>
+
+                    <!-- Teacher Specific -->
+                    <div class="input-group hidden" id="teacher-fields">
+                        <label for="subject-input">Subject Taught</label>
+                        <input type="text" id="subject-input" placeholder="e.g. Mathematics" />
+                    </div>
+
+                    <button type="submit" class="btn primary glowing-btn">Enter EduQuest</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- MAIN APP -->
+        <div id="main-app" class="page">
+            <!-- Navbar -->
+            <header class="topbar">
+                <button id="menu-btn" class="hamburger">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </button>
+                <h1 class="brand-name">EduQuest</h1>
+                <div class="top-stats">
+                    <span class="stat-badge coin-badge">💰 <span id="coin-count">150</span></span>
+                    <span class="stat-badge xp-badge">⭐ <span id="xp-count">1250 XP</span></span>
+                    <button id="chat-toggle-btn" class="stat-badge chat-badge" style="cursor: pointer; background: rgba(102, 252, 241, 0.1); border-color: var(--primary-glow); color: var(--primary-glow);">💬 Chat</button>
+                    <div class="user-avatar" id="nav-avatar">A</div>
+                </div>
+            </header>
+
+            <!-- Dashboard Drawer -->
+            <div id="dashboard-drawer" class="drawer">
+                <div class="drawer-content">
+                    <div class="drawer-header">
+                        <h2>Dashboard</h2>
+                        <button id="close-drawer-btn" class="close-btn">&times;</button>
+                    </div>
+                    
+                    <div class="user-profile-summary">
+                        <div class="big-avatar" id="drawer-avatar">A</div>
+                        <h3 id="display-name">Student Name</h3>
+                        <p id="display-standard">Grade</p>
+                        <div class="level-progress">
+                            <div class="level-text"><span>Level 5</span> <span class="right">Next: Lvl 6</span></div>
+                            <div class="progress-bar-container"><div class="progress-bar-fill" style="width: 65%;"></div></div>
+                        </div>
+                    </div>
+
+                    <!-- Student Information Card -->
+                    <div class="user-info-card" id="user-info-card">
+                        <div class="info-item">role<strong>📧 Email:</strong> <span id="info-email">-</span></div>
+                        <div class="info-item"><strong>👤 Role:</strong> <span id="info-role">Student</span></div>
+                        <div class="info-item"><strong>📍 Region:</strong> <span>Silicon Valley</span></div>
+                        <div class="info-item"><strong>📝 Quizzes Passed:</strong> <span id="info-quizzes-passed">0</span></div>
+                    </div>
+
+                    <div class="dashboard-widgets scrollable">
+                        <!-- Leaderboard Widget -->
+                        <div class="widget-card leaderboard-widget" id="drawer-leaderboard-card" style="cursor: pointer;">
+                            <h4>🏆 Leaderboard (Click to Expand)</h4>
+                            <div class="leaderboard-list">
+                                <div class="leaderboard-item current-user">
+                                    <span class="rank">1</span>
+                                    <span class="name" id="leaderboard-user-name">Alex Johnson</span>
+                                    <span class="score" id="leaderboard-user-xp">1250 XP</span>
+                                </div>
+                                <div class="leaderboard-item">
+                                    <span class="rank">2</span>
+                                    <span class="name">Sarah Conner</span>
+                                    <span class="score">1100 XP</span>
+                                </div>
+                                <div class="leaderboard-item">
+                                    <span class="rank">3</span>
+                                    <span class="name">David Miller</span>
+                                    <span class="score">950 XP</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Badges Locker Widget -->
+                        <div class="widget-card badges-widget">
+                            <h4>🎖️ Badges Locker</h4>
+                            <div class="badges-grid">
+                                <div class="badge-item unlocked" id="badge-welcome" title="Welcome: Logged into EduQuest successfully">🌱</div>
+                                <div class="badge-item locked" id="badge-polyglot" title="Polyglot: Complete a Language Quiz">🌍</div>
+                                <div class="badge-item locked" id="badge-scientist" title="STEM Explorer: Complete a STEM deep-dive module">🔬</div>
+                                <div class="badge-item locked" id="badge-coder" title="Code Architect: Solve a Coding Concept Quiz">💻</div>
+                            </div>
+                        </div>
+
+                        <!-- Certificates Widget -->
+                        <div class="widget-card certificates-widget">
+                            <h4>🎓 Earned Certificates</h4>
+                            <div class="certificates-grid">
+                                <div class="cert-item locked" id="cert-coding" title="Coding Certificate: Score points in coding">📜 Coding</div>
+                                <div class="cert-item locked" id="cert-languages" title="Languages Certificate: Score points in languages">📜 Lang</div>
+                                <div class="cert-item locked" id="cert-stem" title="STEM Excellence Certificate: Score points in STEM">📜 STEM</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Footer Controls -->
+                    <div class="drawer-footer">
+                        <button id="drawer-mycourse-btn" class="footer-btn">📚 My Courses</button>
+                        <button id="drawer-placement-btn" class="footer-btn">💼 Placement Prep</button>
+                        <button id="drawer-feedback-btn" class="footer-btn">💬 Feedback</button>
+                        <button id="drawer-contact-btn" class="footer-btn">📞 Support</button>
+                        <button id="logout-btn" class="btn logout-btn">🚪 Logout</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Drawer Overlay -->
+            <div id="drawer-overlay" class="overlay"></div>
+
+            <!-- Main Content Area -->
+            <main class="main-content">
+                <!-- Grid View -->
+                <div id="categories-grid" class="category-grid">
+                    <div class="category-card" data-category="coding">
+                        <div class="card-icon">💻</div>
+                        <h3>Coding</h3>
+                        <p>Master languages like C, Python, Java & more.</p>
+                        <div class="card-footer"><span>5 Modules</span> <span>Explore &rarr;</span></div>
+                    </div>
+                    <div class="category-card" data-category="languages">
+                        <div class="card-icon">🌍</div>
+                        <h3>Languages</h3>
+                        <p>Learn global languages: English, French, Arabic...</p>
+                        <div class="card-footer"><span>5 Modules</span> <span>Explore &rarr;</span></div>
+                    </div>
+                    <div class="category-card" data-category="quizzes">
+                        <div class="card-icon">🎯</div>
+                        <h3>Quizzes</h3>
+                        <p>Challenge yourself in Classroom, Teams, or Debut.</p>
+                        <div class="card-footer"><span>3 Modes</span> <span>Explore &rarr;</span></div>
+                    </div>
+                    <div class="category-card" data-category="stem">
+                        <div class="card-icon">🔬</div>
+                        <h3>STEM</h3>
+                        <p>Dive deep into Science and Mathematics.</p>
+                        <div class="card-footer"><span>2 Topics</span> <span>Explore &rarr;</span></div>
+                    </div>
+                </div>
+
+                <!-- Dashboard Sub-grid Stats Section (Under Categories Grid) -->
+                <div id="dashboard-sub-stats" class="sub-grid-stats fade-in">
+                    <div class="stats-cards-row">
+                        <div class="stat-card streak-card">
+                            <span class="stat-icon">🔥</span>
+                            <div class="stat-info">
+                                <h3>5 Days</h3>
+                                <p>Streak</p>
+                            </div>
+                        </div>
+                        <div class="stat-card solved-card">
+                            <span class="stat-icon">✅</span>
+                            <div class="stat-info">
+                                <h3 id="solved-count-stat">0</h3>
+                                <p>Solved</p>
+                            </div>
+                        </div>
+                        <div class="stat-card badge-stat-card">
+                            <span class="stat-icon">🏆</span>
+                            <div class="stat-info">
+                                <h3 id="badge-count-stat">1</h3>
+                                <p>Badges</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="doubts-performance-row">
+                        <div class="stat-widget doubts-widget">
+                            <h3>💬 Doubts & Discussions</h3>
+                            <div class="doubts-container" id="doubts-container">
+                                <div class="doubt-thread">
+                                    <strong>David Raj:</strong> How does the C++ virtual destructor prevent memory leak?
+                                    <div class="reply"><strong>System:</strong> It ensures that the derived class destructor is called when deleting via a base class pointer.</div>
+                                </div>
+                            </div>
+                            <form id="add-doubt-form" class="add-doubt-form">
+                                <input type="text" id="doubt-input" placeholder="Type your doubt..." required />
+                                <button type="submit" class="btn primary sm-btn">Post</button>
+                            </form>
+                        </div>
+
+                        <div class="stat-widget performance-widget">
+                            <h3>📊 Exam Performance</h3>
+                            <div class="performance-bars">
+                                <div class="perf-bar-item">
+                                    <span>Coding:</span>
+                                    <div class="bar-bg"><div class="bar-fill" style="width: 90%; background: #38bdf8;"></div></div>
+                                    <span>90%</span>
+                                </div>
+                                <div class="perf-bar-item">
+                                    <span>Languages:</span>
+                                    <div class="bar-bg"><div class="bar-fill" style="width: 85%; background: #f472b6;"></div></div>
+                                    <span>85%</span>
+                                </div>
+                                <div class="perf-bar-item">
+                                    <span>STEM Checks:</span>
+                                    <div class="bar-bg"><div class="bar-fill" style="width: 78%; background: #34d399;"></div></div>
+                                    <span>78%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detail View (Hidden by default) -->
+                <div id="category-detail" class="detail-view hidden">
+                    <button id="back-btn" class="btn secondary back-btn">&larr; Back to Subjects</button>
+                    <div class="detail-header">
+                        <div class="detail-icon" id="detail-icon"></div>
+                        <h2 id="detail-title">Category Info</h2>
+                    </div>
+                    <div class="list-container" id="detail-list">
+                        <!-- Items rendered dynamically via JS -->
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- CHATBOT WIDGET -->
+    <div id="chatbot-widget" class="chatbot-widget hidden">
+        <div class="chat-header">
+            <h3>🤖 EduQuest Assistant</h3>
+            <button id="close-chat-btn" class="close-chat-btn">&times;</button>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <div class="chat-message bot">Hello! I am your EduQuest AI learning assistant. How can I help you today?</div>
+        </div>
+        <div class="chat-chips" id="chat-chips">
+            <button class="chip" data-query="How to study Mathematics?">Math Guide</button>
+            <button class="chip" data-query="Explain C++ Classes">C++ Help</button>
+            <button class="chip" data-query="Translate Hello to Spanish">Spanish Basic</button>
+        </div>
+        <form class="chat-input-area" id="chat-form">
+            <input type="text" id="chat-input" placeholder="Type a message..." autocomplete="off" required />
+            <button type="submit" class="chat-send-btn">Send</button>
+        </form>
+    </div>
+
+    <!-- FEEDBACK MODAL -->
+    <div id="feedback-modal" class="modal hidden">
+        <div class="modal-content glass-card">
+            <span class="modal-close" id="close-feedback-btn">&times;</span>
+            <h2>Send Feedback</h2>
+            <p>Tell us what you think! We appreciate your suggestions.</p>
+            <form id="feedback-form">
+                <div class="input-group">
+                    <label for="feedback-text">Message</label>
+                    <textarea id="feedback-text" rows="4" placeholder="Your experience, bug reports, or suggestions..." required style="width: 100%; padding: 10px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; resize: none;"></textarea>
+                </div>
+                <button type="submit" class="btn primary glowing-btn">Submit Feedback</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- CONTACT SUPPORT MODAL -->
+    <div id="contact-modal" class="modal hidden">
+        <div class="modal-content glass-card">
+            <span class="modal-close" id="close-contact-btn">&times;</span>
+            <h2>Contact Support</h2>
+            <p>Need help? Reach out to us and we'll get back to you shortly.</p>
+            <div style="text-align: left; margin-bottom: 1.5rem; line-height: 1.6; font-size: 0.9rem; background: rgba(0,0,0,0.2); padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+                <p>📧 <strong>Email:</strong> support@eduquest.com</p>
+                <p>📞 <strong>Phone:</strong> +1 (555) 019-2834</p>
+                <p>🏢 <strong>Office:</strong> EduQuest HQ, Silicon Valley</p>
+            </div>
+            <form id="contact-form">
+                <div class="input-group">
+                    <input type="text" id="contact-subject" placeholder="Subject" required />
+                </div>
+                <div class="input-group">
+                    <textarea id="contact-message" rows="3" placeholder="How can we help you?" required style="width: 100%; padding: 10px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; resize: none;"></textarea>
+                </div>
+                <button type="submit" class="btn primary glowing-btn">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- LEADERBOARD DETAILS MODAL -->
+    <div id="leaderboard-modal" class="modal hidden">
+        <div class="modal-content glass-card" style="max-width: 500px;">
+            <span class="modal-close" id="close-leaderboard-btn">&times;</span>
+            <h2>🏆 Leaderboards</h2>
+            <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:15px;">Compare points globally, locally, or with your friends.</p>
+            <div class="leaderboard-tabs">
+                <button class="tab-btn active" data-tab="global">Global</button>
+                <button class="tab-btn" data-tab="local">Local</button>
+                <button class="tab-btn" data-tab="friends">Friends</button>
+            </div>
+            <div class="leaderboard-tab-content scrollable" id="leaderboard-tab-content" style="max-height: 250px; margin-top: 15px; text-align: left; display: flex; flex-direction: column; gap: 8px;">
+                <!-- Populated dynamically via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- MY COURSES MODAL -->
+    <div id="mycourse-modal" class="modal hidden">
+        <div class="modal-content glass-card" style="max-width: 500px;">
+            <span class="modal-close" id="close-mycourse-btn">&times;</span>
+            <h2>📚 My Courses & Grades</h2>
+            <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:15px;">Enroll in academic courses and view your topic performance grades.</p>
+            
+            <form id="enroll-course-form" style="display:flex; gap:10px; margin-bottom:20px;">
+                <select id="course-select" required style="flex:1; padding:8px 12px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.1); color:white; border-radius:8px;">
+                    <option value="">-- Choose a Course to Add --</option>
+                    <option value="Python Essentials">Python Essentials</option>
+                    <option value="Data Structures & Algorithms">Data Structures & Algorithms</option>
+                    <option value="Engineering Mathematics">Engineering Mathematics</option>
+                    <option value="French Vocabulary & Accent">French Vocabulary & Accent</option>
+                    <option value="Classical Physics Mechanics">Classical Physics Mechanics</option>
+                </select>
+                <button type="submit" class="btn primary glowing-btn sm-btn">Enroll</button>
+            </form>
+
+            <h4 style="color:var(--primary-glow); margin-bottom:10px; text-align:left;">Enrolled Courses</h4>
+            <div id="enrolled-courses-list" style="text-align:left; max-height:160px; overflow-y:auto; display:flex; flex-direction:column; gap:8px; margin-bottom:15px;">
+                <!-- Dynamic courses -->
+            </div>
+        </div>
+    </div>
+
+    <!-- PLACEMENT PREPARATION HUB MODAL -->
+    <div id="placement-modal" class="modal hidden">
+        <div class="modal-content glass-card" style="max-width: 550px;">
+            <span class="modal-close" id="close-placement-btn">&times;</span>
+            <h2>💼 Placement Prep Hub</h2>
+            <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:15px;">Crack aptitude rounds, study interview questions, and build your resume.</p>
+            
+            <div class="leaderboard-tabs" style="margin-bottom: 15px;">
+                <button class="tab-btn active" id="btn-tab-aptitude" style="font-size:0.8rem; padding:8px;">Aptitude</button>
+                <button class="tab-btn" id="btn-tab-interview" style="font-size:0.8rem; padding:8px;">Technical Q&A</button>
+                <button class="tab-btn" id="btn-tab-resume" style="font-size:0.8rem; padding:8px;">Resume Builder</button>
+            </div>
+
+            <!-- Aptitude Section -->
+            <div id="placement-aptitude-section" class="placement-section">
+                <p style="font-weight:600; text-align:left; margin-bottom:8px;">Mock Quantitative Aptitude Check:</p>
+                <p style="text-align:left; font-size:0.95rem; margin-bottom:12px; line-height:1.4;">"A train running at the speed of 60 km/hr crosses a pole in 9 seconds. What is the length of the train?"</p>
+                <div class="options-grid" style="grid-template-columns:1fr 1fr;">
+                    <button class="btn secondary apt-opt-btn">120 meters</button>
+                    <button class="btn secondary apt-opt-btn">150 meters</button>
+                    <button class="btn secondary apt-opt-btn">324 meters</button>
+                    <button class="btn secondary apt-opt-btn">180 meters</button>
+                </div>
+                <p id="apt-feedback" class="feedback-text hidden" style="margin-top:10px;"></p>
+            </div>
+
+            <!-- Technical Q&A Section -->
+            <div id="placement-interview-section" class="placement-section hidden" style="text-align:left; max-height:220px; overflow-y:auto; display:flex; flex-direction:column; gap:10px;">
+                <div class="concept-box" style="margin: 0; padding:10px;">
+                    <strong>Q: What is Object-Oriented Programming (OOP)?</strong>
+                    <p style="font-size:0.85rem; color:var(--text-muted); margin-top:4px;">OOP is a paradigm based on "objects", which contain data and methods. Key principles are Inheritance, Encapsulation, Polymorphism, and Abstraction.</p>
+                </div>
+                <div class="concept-box" style="margin: 0; padding:10px; border-left-color: var(--secondary-glow);">
+                    <strong>Q: Difference between pointer and reference in C++?</strong>
+                    <p style="font-size:0.85rem; color:var(--text-muted); margin-top:4px;">Pointers store addresses and can be reassigned or null. References are aliases, cannot be reassigned, and cannot be null.</p>
+                </div>
+            </div>
+
+            <!-- Resume Builder Section -->
+            <div id="placement-resume-section" class="placement-section hidden">
+                <form id="resume-builder-form" style="text-align:left; display:flex; flex-direction:column; gap:8px;">
+                    <div class="input-group" style="margin-bottom:8px;">
+                        <label>Technical Skills</label>
+                        <input type="text" id="resume-skills" placeholder="e.g. C, C++, Python, HTML, CSS" required style="padding:8px 12px;" />
+                    </div>
+                    <div class="input-group" style="margin-bottom:8px;">
+                        <label>Major Projects</label>
+                        <input type="text" id="resume-projects" placeholder="e.g. E-Commerce Website, Chat Application" required style="padding:8px 12px;" />
+                    </div>
+                    <button type="submit" class="btn primary glowing-btn">Compile & Generate Resume</button>
+                </form>
+                <div id="generated-resume-box" class="hidden" style="margin-top:12px; background:#020617; border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:12px; font-family:monospace; text-align:left; white-space:pre-wrap; font-size:0.8rem; color:#fff;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add script at bottom -->
+    <script src="app.js"></script>
+</body>
+</html>
+  
+   
+   
+   
+   :root {
+    --bg-color: #0b0c10;
+    --card-bg: rgba(31, 40, 51, 0.4);
+    --glass-border: rgba(69, 162, 158, 0.2);
+    --primary: #45a29e;
+    --primary-glow: #66fcf1;
+    --secondary-glow: #c026d3;
+    --text-main: #ffffff;
+    --text-muted: #c5c6c7;
+    --success: #10b981;
+    --danger: #ef4444;
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    background-image: 
+        radial-gradient(circle at 15% 50%, rgba(102, 252, 241, 0.08), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(192, 38, 211, 0.08), transparent 25%);
+    color: var(--text-main);
+    min-height: 100vh;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+}
+
+#app {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.page.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Splash */
+#splash {
+    background: radial-gradient(circle, #1a1a2e 0%, #0f0f1a 100%);
+    z-index: 50;
+}
+
+.logo-title {
+    font-size: 4rem;
+    background: linear-gradient(90deg, var(--primary-glow), var(--secondary-glow));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.pulse { animation: pulseGlow 2s infinite alternate; }
+.subtitle { font-size: 1.2rem; color: var(--text-muted); margin-top: 1rem; letter-spacing: 3px; text-transform: uppercase; }
+.fade-in { animation: fadeIn 1.5s forwards; }
+
+@keyframes pulseGlow {
+    0% { filter: drop-shadow(0 0 10px rgba(102,252,241,0.3)); transform: scale(1); }
+    100% { filter: drop-shadow(0 0 25px rgba(192,38,211,0.6)); transform: scale(1.05); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Cards & Forms */
+.glass-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 2.5rem;
+    width: 90%;
+    max-width: 450px;
+    text-align: center;
+}
+
+.glass-card h2 { font-size: 2rem; margin-bottom: 1rem; color: var(--primary-glow); }
+.glass-card p { color: var(--text-muted); margin-bottom: 2rem; font-size: 0.95rem; }
+
+.input-group { margin-bottom: 1.5rem; text-align: left; }
+.input-group label { display: block; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-muted); }
+input[type="text"], input[type="email"], select {
+    width: 100%; padding: 12px 16px; background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.1); 
+    border-radius: 8px; color: white; font-family: 'Inter', sans-serif; font-size: 1rem; outline: none; transition: var(--transition);
+}
+input:focus, select:focus { border-color: var(--primary-glow); box-shadow: 0 0 10px rgba(102, 252, 241, 0.3); }
+select option { background-color: var(--bg-color); color: var(--text-main); }
+.hidden { display: none !important; }
+
+/* Buttons */
+.btn {
+    width: 100%; padding: 12px; border: none; border-radius: 8px; font-family: 'Outfit', sans-serif; 
+    font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: var(--transition); text-transform: uppercase; letter-spacing: 1px;
+}
+.sm-btn { padding: 6px 16px; font-size: 0.85rem; width: auto; text-transform: none; }
+.glowing-btn {
+    background: transparent; color: var(--primary-glow); border: 1px solid var(--primary-glow); position: relative; overflow: hidden;
+}
+.glowing-btn::before {
+    content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(102, 252, 241, 0.4), transparent); transition: left 0.5s;
+}
+.glowing-btn:hover { background: rgba(102, 252, 241, 0.1); box-shadow: 0 0 15px rgba(102, 252, 241, 0.5); text-shadow: 0 0 5px rgba(102, 252, 241, 0.5); }
+.glowing-btn:hover::before { left: 100%; }
+.secondary { background: rgba(255,255,255,0.05); color: var(--text-main); border: 1px solid rgba(255,255,255,0.2); }
+.secondary:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
+
+/* Main App */
+#main-app { justify-content: flex-start; align-items: stretch; }
+.topbar {
+    height: 70px; background: rgba(11, 12, 16, 0.8); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex; justify-content: space-between; align-items: center; padding: 0 1.5rem; z-index: 20;
+}
+.brand-name { font-size: 1.5rem; color: var(--primary-glow); letter-spacing: 1px; }
+
+.hamburger { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 5px; padding: 5px; }
+.hamburger .bar { width: 25px; height: 3px; background-color: var(--text-main); border-radius: 2px; transition: var(--transition); }
+.hamburger:hover .bar { background-color: var(--primary-glow); box-shadow: 0 0 8px var(--primary-glow); }
+
+.top-stats { display: flex; gap: 1rem; align-items: center; }
+.stat-badge { background: rgba(255,255,255,0.1); padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 5px; }
+.coin-badge { color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3); }
+.xp-badge { color: #a78bfa; border: 1px solid rgba(167, 139, 250, 0.3); }
+
+.user-avatar {
+    width: 35px; height: 35px; background: linear-gradient(135deg, var(--primary-glow), var(--secondary-glow));
+    border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: 700; color: #fff; cursor: pointer;
+}
+
+.main-content { flex: 1; padding: 2rem; overflow-y: auto; position: relative; }
+
+/* Grid Categories */
+.category-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; }
+.category-card {
+    background: var(--card-bg); border: 1px solid var(--glass-border); backdrop-filter: blur(10px); border-radius: 16px; padding: 2rem;
+    cursor: pointer; transition: var(--transition); position: relative; overflow: hidden; display: flex; flex-direction: column;
+}
+.category-card:hover { transform: translateY(-5px); border-color: rgba(102, 252, 241, 0.4); box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+.card-icon { font-size: 3rem; margin-bottom: 1rem; }
+.category-card h3 { font-size: 1.8rem; margin-bottom: 0.5rem; }
+.category-card[data-category="coding"] h3 { color: #38bdf8; }
+.category-card[data-category="languages"] h3 { color: #f472b6; }
+.category-card[data-category="quizzes"] h3 { color: #fbbf24; }
+.category-card[data-category="stem"] h3 { color: #34d399; }
+.card-footer { display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-muted); border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem; margin-top: auto; }
+
+/* Details Base */
+.detail-view { max-width: 1000px; margin: 0 auto; animation: fadeIn 0.4s ease-out; }
+.back-btn { background: transparent; color: var(--text-muted); border: none; width: auto; padding: 0; font-size: 1rem; margin-bottom: 2rem; text-transform:none; border: none !important;}
+.back-btn:hover { color: var(--primary-glow); background: transparent; border: none;}
+.detail-header { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); position: relative;}
+.detail-icon { font-size: 3.5rem; } .detail-header h2 { font-size: 2.5rem; flex: 1; }
+
+.code-utils { display: flex; gap: 10px; align-items: center; }
+
+/* ====================================================
+   🔥 CUSTOM BESPOKE CATEGORY UIs
+   ==================================================== */
+
+/* 1. CODING */
+.coding-container { display: flex; flex-direction: column; gap: 1rem; }
+.mission-card {
+    background: linear-gradient(90deg, rgba(31, 40, 51, 0.8), rgba(0,0,0,0.4));
+    border-left: 4px solid var(--primary-glow);
+    padding: 1.5rem 2rem; border-radius: 8px 12px 12px 8px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: var(--transition);
+}
+.mission-card:hover { transform: scale(1.02); border-color: #fff; background: rgba(31, 40, 51, 1); }
+.mission-card h4 { color: var(--primary-glow); font-size: 1.3rem; margin-bottom: 0.25rem; font-family: 'Outfit'; text-transform: uppercase; letter-spacing: 1px;}
+.mission-card p { color: var(--text-muted); font-size: 0.9rem; }
+.mission-card .action-btn { width: auto; padding: 8px 30px; }
+.boss-level { border-left-color: var(--secondary-glow); background: linear-gradient(90deg, rgba(192, 38, 211, 0.2), rgba(0,0,0,0.4)); }
+.boss-level h4 { color: var(--secondary-glow); }
+.boss-level .action-btn { border-color: var(--secondary-glow); color: var(--secondary-glow); }
+
+/* Coding Interactive Concept UI */
+.interactive-concept { background: var(--card-bg); padding: 3rem; border-radius: 12px; border: 1px solid var(--primary-glow); }
+.concept-box { background: rgba(0,0,0,0.5); padding: 1.5rem; border-left: 3px solid var(--secondary-glow); margin: 1.5rem 0; font-size: 1.1rem; line-height: 1.6; }
+.question-box { margin-top: 2rem; padding-top: 2rem; border-top: 1px dashed rgba(255,255,255,0.2); }
+.question-box h4 { color: var(--primary-glow); margin-bottom: 1rem; font-size: 1.5rem; }
+.options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 1rem; }
+.option-btn { font-family: 'Inter', sans-serif; font-size: 1.1rem; padding: 15px; }
+.option-btn.selected { background: var(--primary-glow); color: #000; font-weight: bold; border-color: var(--primary-glow); box-shadow: 0 0 15px var(--primary-glow); }
+.feedback-text { margin-top: 1.5rem; font-weight: bold; font-size: 1.2rem; }
+
+/* 2. LANGUAGES: Duolingo Path Style */
+.languages-container .duo-path {
+    display: flex; flex-direction: column; align-items: center; padding: 2rem 0; position: relative; gap: 2rem;
+}
+.duo-path::before {
+    content: ''; position: absolute; top: 0; bottom: 0; left: 50%; width: 6px; background: rgba(255,255,255,0.1); transform: translateX(-50%); z-index: 1; border-radius: 10px;
+}
+.duo-node { display: flex; align-items: center; position: relative; z-index: 2; width: 100%; max-width: 300px; }
+.duo-left { justify-content: flex-end; padding-right: 50%; transform: translateX(25px); }
+.duo-right { justify-content: flex-start; padding-left: 50%; transform: translateX(-25px); flex-direction: row-reverse;}
+.duo-circle {
+    width: 60px; height: 60px; background: var(--bg-color); border: 4px solid var(--primary-glow); border-radius: 50%; 
+    display: flex; justify-content: center; align-items: center; font-size: 1.8rem; box-shadow: 0 5px 0 rgba(69, 162, 158, 0.4);
+    cursor: pointer; transition: transform 0.2s;
+}
+.duo-circle:active { transform: translateY(5px); box-shadow: 0 0 0 transparent; }
+.duo-label { background: var(--card-bg); padding: 8px 16px; border-radius: 20px; font-weight: 600; margin: 0 15px; border: 1px solid rgba(255,255,255,0.1); }
+.duo-locked .duo-circle { border-color: #555; background: #222; filter: grayscale(1); box-shadow: 0 5px 0 #111; cursor: not-allowed; }
+.duo-locked .duo-label { color: #555; }
+
+
+/* 3. STEM: Brilliant.org Style */
+.stem-container .brilliant-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;
+}
+.brilliant-card {
+    background: #1e1e24; border-radius: 8px; padding: 2rem; cursor: pointer; transition: var(--transition);
+    text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05);
+}
+.brilliant-card:hover { transform: translateY(-3px); box-shadow: 0 8px 15px rgba(0,0,0,0.5); }
+.brilliant-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+.brilliant-card h4 { font-size: 1.1rem; margin-bottom: 0.5rem; color: #fff; }
+.brilliant-card p { font-size: 0.85rem; color: #aaa; }
+
+
+/* 4. QUIZZES: Role Based Block Style */
+.quizzes-container { display: flex; flex-direction: column; gap: 2rem; }
+.quiz-block {
+    background: var(--card-bg); border: 1px solid var(--glass-border); padding: 2.5rem; border-radius: 16px;
+    display: flex; flex-direction: column; align-items: flex-start; position: relative; overflow: hidden;
+}
+.quiz-block h3 { font-size: 1.8rem; margin-bottom: 0.5rem; color: #fff; }
+.quiz-block p { color: var(--text-muted); margin-bottom: 1.5rem; max-width: 600px; }
+.teacher-block { border-color: var(--success); background: rgba(16, 185, 129, 0.05); }
+.teacher-block h3 { color: var(--success); }
+.locked-block { border-color: #333; background: #111; opacity: 0.7; }
+.locked-block h3, .locked-block p { color: #555; }
+.lock-icon { position: absolute; right: 2rem; top: 2rem; font-size: 5rem; opacity: 0.1; }
+.mini-games-grid { display: flex; gap: 15px; margin-top: 10px; width: 100%; flex-wrap: wrap;}
+.mini-game-btn { font-size: 1rem; width: auto; flex: 1; min-width: 150px; }
+
+/* Dashboard Drawer */
+.drawer {
+    position: fixed; top: 0; left: -400px; width: 350px; height: 100vh; background: rgba(15, 20, 25, 0.95);
+    backdrop-filter: blur(20px); border-right: 1px solid var(--glass-border); z-index: 100; transition: left 0.4s; display: flex; flex-direction: column;
+}
+.drawer.open { left: 0; }
+.overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(3px); z-index: 90; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+.overlay.visible { opacity: 1; pointer-events: auto; }
+.drawer-content { display: flex; flex-direction: column; height: 100%; padding: 1.5rem; }
+.drawer-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+.drawer-header h2 { font-size: 1.5rem; color: var(--primary-glow); }
+.close-btn { background: none; border: none; color: var(--text-muted); font-size: 2rem; cursor: pointer; transition: var(--transition); }
+.close-btn:hover { color: #fff; transform: rotate(90deg); }
+.user-profile-summary { background: rgba(255,255,255,0.03); border-radius: 16px; padding: 1.5rem; text-align: center; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.05); }
+.big-avatar { width: 70px; height: 70px; background: linear-gradient(135deg, var(--secondary-glow), var(--primary-glow)); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 2rem; font-weight: 700; margin: 0 auto 1rem; box-shadow: 0 0 20px rgba(192, 38, 211, 0.4); }
+.user-profile-summary p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; }
+.level-progress { text-align: left; }
+.level-text { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 5px; }
+.progress-bar-container { width: 100%; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; }
+.progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--primary-glow), var(--secondary-glow)); }
+.gamification-features { flex: 1; overflow-y: auto; padding-right: 10px; }
+.feature-item { margin-bottom: 1.2rem; padding-bottom: 1.2rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.feature-item h4 { color: var(--text-main); font-size: 1.05rem; margin-bottom: 0.5rem; }
+.feature-item p { color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; }
+
+@media (max-width: 768px) {
+    .drawer { width: 85%; }
+    .category-grid { grid-template-columns: 1fr; }
+    .code-utils { flex-direction: column; align-items: flex-end; }
+    .detail-header { align-items: flex-start; flex-direction: column; }
+}
+
+/* ====================================================
+   💎 CHATBOT & MODALS & DASHBOARD WIDGETS
+   ==================================================== */
+
+/* Chatbot Widget */
+.chatbot-widget {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 350px;
+    height: 500px;
+    background: rgba(15, 23, 42, 0.95);
+    border: 1px solid var(--primary-glow);
+    border-radius: 16px;
+    z-index: 1000;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(102, 252, 241, 0.2);
+    backdrop-filter: blur(12px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: slideUp 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.chat-header {
+    background: rgba(69, 162, 158, 0.2);
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.chat-header h3 {
+    font-size: 1rem;
+    color: var(--primary-glow);
+    margin: 0;
+}
+
+.close-chat-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+.close-chat-btn:hover { color: #fff; }
+
+.chat-messages {
+    flex: 1;
+    padding: 16px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.chat-message {
+    max-width: 80%;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.chat-message.bot {
+    align-self: flex-start;
+    background: rgba(255, 255, 255, 0.05);
+    border-left: 3px solid var(--primary-glow);
+    color: var(--text-main);
+}
+
+.chat-message.user {
+    align-self: flex-end;
+    background: linear-gradient(135deg, rgba(69, 162, 158, 0.4), rgba(192, 38, 211, 0.4));
+    border-right: 3px solid var(--secondary-glow);
+    color: #fff;
+}
+
+.chat-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 8px 16px;
+    background: rgba(0, 0, 0, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.chat-chips .chip {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-muted);
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.chat-chips .chip:hover {
+    background: rgba(102, 252, 241, 0.1);
+    color: var(--primary-glow);
+    border-color: var(--primary-glow);
+}
+
+.chat-input-area {
+    display: flex;
+    padding: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(11, 12, 16, 0.9);
+}
+
+.chat-input-area input {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: white;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    outline: none;
+}
+.chat-input-area input:focus {
+    border-color: var(--primary-glow);
+}
+
+.chat-send-btn {
+    margin-left: 8px;
+    background: var(--primary);
+    border: none;
+    border-radius: 8px;
+    color: #000;
+    font-weight: bold;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: var(--transition);
+}
+.chat-send-btn:hover {
+    background: var(--primary-glow);
+    box-shadow: 0 0 10px var(--primary-glow);
+}
+
+/* Modals styling */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 1;
+    transition: opacity 0.3s;
+}
+
+.modal.hidden {
+    display: none !important;
+}
+
+.modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 450px;
+    animation: zoomIn 0.3s ease;
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: var(--transition);
+}
+.modal-close:hover {
+    color: white;
+}
+
+/* Dashboard drawer specific */
+.dashboard-widgets {
+    flex: 1;
+    overflow-y: auto;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding-right: 5px;
+}
+
+.widget-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 15px;
+}
+
+.widget-card h4 {
+    font-size: 0.95rem;
+    color: var(--primary-glow);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.leaderboard-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.leaderboard-item {
+    display: flex;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.02);
+    font-size: 0.85rem;
+}
+
+.leaderboard-item.current-user {
+    border-color: var(--primary-glow);
+    background: rgba(69, 162, 158, 0.1);
+}
+
+.leaderboard-item .rank {
+    font-weight: bold;
+    width: 24px;
+    color: var(--secondary-glow);
+}
+
+.leaderboard-item.current-user .rank {
+    color: var(--primary-glow);
+}
+
+.leaderboard-item .name {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.leaderboard-item .score {
+    font-weight: 600;
+}
+
+.badges-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    justify-items: center;
+}
+
+.badge-item {
+    font-size: 2rem;
+    width: 50px;
+    height: 50px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.badge-item:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.badge-item.unlocked {
+    border-color: var(--primary-glow);
+    box-shadow: 0 0 8px rgba(102, 252, 241, 0.2);
+}
+
+.badge-item.locked {
+    filter: grayscale(1);
+    opacity: 0.25;
+}
+
+.drawer-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.footer-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    padding: 8px;
+    text-align: left;
+    cursor: pointer;
+    transition: var(--transition);
+    border-radius: 6px;
+}
+.footer-btn:hover {
+    background: rgba(255, 255, 255, 0.03);
+    color: #fff;
+}
+
+.logout-btn {
+    margin-top: 5px;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid var(--danger);
+    color: var(--danger);
+    width: 100%;
+}
+.logout-btn:hover {
+    background: var(--danger);
+    color: white;
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+}
+
+/* Database loader panel */
+.db-query-panel {
+    background: #020617;
+    border: 1px solid #1e293b;
+    border-radius: 8px;
+    padding: 12px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.8rem;
+    margin-bottom: 20px;
+    color: #38bdf8;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-height: 120px;
+    overflow-y: auto;
+}
+
+.db-query-header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dashed #334155;
+    padding-bottom: 4px;
+    margin-bottom: 4px;
+    font-weight: bold;
+}
+
+.mongodb-indicator {
+    color: #10b981;
+}
+
+.supabase-indicator {
+    color: #38bdf8;
+}
+
+.db-query-log {
+    line-height: 1.4;
+    white-space: pre-wrap;
+}
+
+/* Loading spinner */
+.spinner-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    gap: 15px;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(102, 252, 241, 0.1);
+    border-top-color: var(--primary-glow);
+    border-radius: 50%;
+    animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Mini Games layouts */
+.memory-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    width: 100%;
+    max-width: 240px;
+    margin: 15px auto;
+}
+
+.memory-tile {
+    aspect-ratio: 1;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.1s;
+}
+
+.memory-tile.active {
+    background: var(--primary-glow);
+    box-shadow: 0 0 15px var(--primary-glow);
+}
+
+.memory-tile.correct {
+    background: var(--success);
+    box-shadow: 0 0 15px var(--success);
+}
+
+.memory-tile.wrong {
+    background: var(--danger);
+    box-shadow: 0 0 15px var(--danger);
+}
+
+.sequencer-card {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 20px;
+    border-radius: 8px;
+    font-size: 1.8rem;
+    text-align: center;
+    font-weight: bold;
+    margin: 15px 0;
+    color: var(--primary-glow);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    text-shadow: 0 0 10px rgba(102, 252, 241, 0.5);
+    letter-spacing: 2px;
+}
+
+.quiz-feedback {
+    margin-top: 15px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* STEM Deep Dive Detail layout */
+.stem-deep-dive {
+    background: var(--card-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.stem-section-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.stem-section-card h3 {
+    font-size: 1.15rem;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.stem-section-card ul {
+    padding-left: 20px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.stem-formula-panel {
+    background: rgba(0,0,0,0.4);
+    padding: 12px;
+    border-radius: 6px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.1rem;
+    text-align: center;
+    color: var(--primary-glow);
+    margin: 10px 0;
+    border: 1px dashed rgba(255,255,255,0.1);
+}
+
+/* --- STUDENT INFORMATION CARD --- */
+.user-info-card {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 12px 16px;
+    margin: 0 1.5rem 1.5rem;
+    font-size: 0.82rem;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-left: 3px solid var(--primary-glow);
+}
+
+.user-info-card .info-item {
+    color: var(--text-muted);
+}
+
+.user-info-card .info-item strong {
+    color: var(--text-main);
+    margin-right: 4px;
+}
+
+/* --- CERTIFICATES LOCKER --- */
+.certificates-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.cert-item {
+    flex: 1;
+    font-size: 0.78rem;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 8px 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: var(--transition);
+    opacity: 0.3;
+    filter: grayscale(1);
+    text-align: center;
+}
+
+.cert-item:hover {
+    transform: translateY(-2px);
+}
+
+.cert-item.unlocked {
+    opacity: 1;
+    filter: none;
+    border-color: #fbbf24;
+    color: #fbbf24;
+    background: rgba(251, 191, 36, 0.05);
+    box-shadow: 0 0 10px rgba(251, 191, 36, 0.2);
+    font-weight: 600;
+}
+
+/* --- LEADERBOARD MODAL TABS --- */
+.leaderboard-tabs {
+    display: flex;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.leaderboard-tabs .tab-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    padding: 10px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 0.88rem;
+    border-radius: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.leaderboard-tabs .tab-btn.active {
+    background: var(--primary-glow);
+    color: #000;
+    box-shadow: 0 0 10px rgba(102, 252, 241, 0.3);
+}
+
+/* --- FRIEND LIST INTERACTIVE ELEMENTS --- */
+.friend-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.friend-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.friend-actions {
+    display: flex;
+    gap: 6px;
+}
+
+.friend-btn {
+    padding: 4px 10px;
+    font-size: 0.72rem;
+    font-family: 'Outfit', sans-serif;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: var(--transition);
+    border: 1px solid transparent;
+}
+
+.friend-btn.follow {
+    background: transparent;
+    color: var(--primary-glow);
+    border-color: var(--primary-glow);
+}
+
+.friend-btn.follow.following {
+    background: var(--primary-glow);
+    color: #000;
+    box-shadow: 0 0 8px var(--primary-glow);
+}
+
+.friend-btn.chat:hover {
+    background: var(--secondary-glow);
+    color: #fff;
+    box-shadow: 0 0 8px var(--secondary-glow);
+}
+
+/* --- SUB-GRID STATISTICS LAYOUT --- */
+.sub-grid-stats {
+    margin-top: 30px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.stats-cards-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.stat-card {
+    background: var(--card-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: var(--transition);
+}
+.stat-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(102, 252, 241, 0.3);
+}
+
+.stat-icon {
+    font-size: 2rem;
+}
+
+.stat-info h3 {
+    font-size: 1.4rem;
+    color: var(--primary-glow);
+}
+.stat-info p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.doubts-performance-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    .doubts-performance-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+.stat-widget {
+    background: var(--card-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.stat-widget h3 {
+    font-size: 1.1rem;
+    color: var(--text-main);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding-bottom: 8px;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.doubts-container {
+    max-height: 150px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-right: 5px;
+}
+
+.doubt-thread {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 0.85rem;
+    text-align: left;
+    border-left: 3px solid var(--primary-glow);
+}
+
+.doubt-thread .reply {
+    margin-top: 5px;
+    padding-top: 5px;
+    border-top: 1px dashed rgba(255,255,255,0.1);
+    color: var(--text-muted);
+    padding-left: 10px;
+}
+
+.add-doubt-form {
+    display: flex;
+    gap: 10px;
+}
+.add-doubt-form input {
+    flex: 1;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: #fff;
+    font-size: 0.85rem;
+    outline: none;
+}
+.add-doubt-form input:focus {
+    border-color: var(--primary-glow);
+}
+
+.performance-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.perf-bar-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.85rem;
+    text-align: left;
+}
+
+.perf-bar-item span:first-child {
+    width: 110px;
+    color: var(--text-muted);
+}
+.perf-bar-item span:last-child {
+    width: 40px;
+    font-weight: bold;
+    text-align: right;
+}
+
+.bar-bg {
+    flex: 1;
+    height: 8px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+.bar-fill {
+    height: 100%;
+}
+
+.placement-section {
+    animation: fadeIn 0.3s ease;
+}
+
+.apt-opt-btn {
+    padding: 10px;
+    font-size: 0.9rem;
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+
+
+
+
+
+
+// --- EmailJS Setup Instructions ---
+// To make OTP emails work, replace the placeholder IDs with your actual EmailJS credentials
+(function () {
+    emailjs.init("To1wc-nJjbxlxVUx1");
+})();
+
+// Data models representing collections in MongoDB and tables in Supabase
+const mongodbDatabase = {
+    languages: {
+        'Spanish': {
+            flag: '🇪🇸',
+            concept: 'Greetings in Spanish. "Hola" means hello, "Buenos días" means good morning, and "Adiós" means goodbye. Verbs like "Ser" and "Estar" both mean "to be" but Ser is used for permanent characteristics, while Estar is used for temporary states or locations.',
+            roadmap: '1. Focus on speaking common greetings daily.\n2. Practice verb conjugations in the present tense.\n3. Build vocabulary with flashcards of household items.',
+            question: 'Which word translates to "Good Morning" in Spanish?',
+            options: ['Buenos días', 'Buenas noches', 'Hola', 'Adiós'],
+            answer: 'Buenos días'
+        },
+        'French': {
+            flag: '🇫🇷',
+            concept: 'Greetings in French. "Bonjour" means hello or good morning, "Bonsoir" means good evening, and "Au revoir" means goodbye. Nouns are gendered (masculine/feminine) and require corresponding articles like "le" (masc) or "la" (fem).',
+            roadmap: '1. Listen to French audio clips to master pronunciation.\n2. Study gender markers for standard nouns.\n3. Practice basic conversations with greeting structures.',
+            question: 'What does the French greeting "Bonjour" mean?',
+            options: ['Goodbye', 'Good evening', 'Hello / Good morning', 'Thank you'],
+            answer: 'Hello / Good morning'
+        },
+        'German': {
+            flag: '🇩🇪',
+            concept: 'Basic German. "Guten Tag" means good day, and "Auf Wiedersehen" means goodbye. German nouns have three genders: masculine (der), feminine (die), and neuter (das). The verb always goes in the second position in standard statements.',
+            roadmap: '1. Memorize noun genders along with vocabulary words.\n2. Study the rule of verb placement in sentences.\n3. Practice sentence building using common structures.',
+            question: 'What is the German article for feminine nouns?',
+            options: ['der', 'die', 'das', 'den'],
+            answer: 'die'
+        },
+        'Mandarin': {
+            flag: '🇨🇳',
+            concept: 'Introduction to Mandarin Chinese. "Nǐ hǎo" means hello. Mandarin is a tonal language with four distinct tones. Changing the tone of a syllable changes its entire meaning.',
+            roadmap: '1. Practice the four tones meticulously using audio drills.\n2. Master Pinyin (the phonetic system) before writing characters.\n3. Learn basic subject-verb-object grammar rules.',
+            question: 'How many primary tones does Mandarin Chinese have?',
+            options: ['Two', 'Three', 'Four', 'Five'],
+            answer: 'Four'
+        },
+        'Japanese': {
+            flag: '🇯🇵',
+            concept: 'Japanese basics. "Konnichiwa" means hello. Japanese writing consists of three scripts: Hiragana (phonetic), Katakana (foreign words), and Kanji (Chinese characters). Sentence structure is Subject-Object-Verb (SOV).',
+            roadmap: '1. Start by learning the 46 characters of Hiragana.\n2. Practice basic particles like "wa", "ga", and "o".\n3. Study Japanese verb placement at the end of sentences.',
+            question: 'What is the sentence structure of Japanese language?',
+            options: ['Subject-Verb-Object (SVO)', 'Subject-Object-Verb (SOV)', 'Verb-Subject-Object (VSO)', 'Object-Subject-Verb (OSV)'],
+            answer: 'Subject-Object-Verb (SOV)'
+        }
+    }
+};
+
+const supabaseDatabase = {
+    stem: {
+        'Engineering Mathematics': {
+            what: ['Calculus (Limits, Derivatives, Integrals)', 'Ordinary Differential Equations (ODEs)', 'Linear Algebra (Vector Spaces, Matrices, Eigenvalues)'],
+            how: '1. Solve problems analytically first, then use graphs to visualize the math.\n2. Break down ODEs by identifying the order and linearity.\n3. Connect linear algebra to geometric transformations like rotation and scaling.',
+            info: 'Calculus measures rates of change (derivatives) and accumulations (integrals). The fundamental theorem of calculus connects them. Ordinary Differential Equations model physical systems such as pendulum motion or circuits.',
+            formula: 'f\'(x) = lim (h->0) [f(x+h) - f(x)] / h',
+            question: 'Find the derivative of f(x) = x^2.',
+            options: ['x', '2', '2x', 'x^2/2'],
+            answer: '2x'
+        },
+        'Engineering Physics': {
+            what: ['Classical Mechanics (Kinematics, Statics, Dynamics)', 'Thermodynamics (First/Second Laws, Entropy)', 'Electromagnetism (Maxwell\'s Equations, Flux)'],
+            how: '1. Always draw a complete Free-Body Diagram before calculating forces.\n2. Understand that heat naturally flows from high to low temperatures.\n3. Visualize magnetic fields as closed loops around currents.',
+            info: 'Newton\'s Second Law governs dynamics: F = ma. Thermodynamics dictates energy conservation (dU = dQ - dW) and indicates that the entropy of an isolated system always increases over time.',
+            formula: 'dU = dQ - dW  |  F = m * a',
+            question: 'What is the force formula in Newton\'s second law?',
+            options: ['F = m / a', 'F = m * a', 'F = m + a', 'F = a / m'],
+            answer: 'F = m * a'
+        },
+        'Engineering Chemistry': {
+            what: ['Molecular Structure & Bonding (Hybridization, MO Theory)', 'Thermodynamics of Materials (Enthalpy, Gibbs Free Energy)', 'Electrochemistry (Corrosion, Batteries, Nernst Equation)'],
+            how: '1. Use molecular geometry models to predict polarity.\n2. Learn to balance half-reactions for redox equations.\n3. Analyze galvanic cells by identifying anodes and cathodes.',
+            info: 'Hybridization describes how atomic orbitals mix to form new hybrid orbitals (sp, sp2, sp3), determining molecular shape. Gibbs Free Energy (ΔG = ΔH - TΔS) predicts chemical spontaneity.',
+            formula: 'ΔG = ΔH - T * ΔS',
+            question: 'What does the first law of thermodynamics state about energy?',
+            options: ['Energy can be created', 'Energy is always lost', 'Energy is conserved', 'Energy cannot change forms'],
+            answer: 'Energy is conserved'
+        },
+        'Core Mechanics': {
+            what: ['Statics (Equilibrium of Forces & Moments)', 'Dynamics (Kinematics of Particles, Rigid Bodies)', 'Strength of Materials (Stress, Strain, Hooke\'s Law)'],
+            how: '1. For statics, ensure the sum of all forces and moments equals zero.\n2. Distinguish between normal stress and shear stress.\n3. Remember that stress is directly proportional to strain within elastic limits.',
+            info: 'Mechanical equilibrium requires static forces and moments to balance. In deformable bodies, Hooke\'s Law (σ = E * ε) relates tensile stress to strain using Young\'s Modulus.',
+            formula: 'σ = E * ε  |  ΣF = 0 , ΣM = 0',
+            question: 'Under Hooke\'s law, stress is directly proportional to what?',
+            options: ['Strain', 'Velocity', 'Temperature', 'Density'],
+            answer: 'Strain'
+        }
+    }
+};
+
+// Global State
+let userProfile = {
+    email: 'student@example.com',
+    role: 'student', // 'student' or 'teacher'
+    name: 'Alex Johnson',
+    standard: 'Engineering 1st Year',
+    subject: '',
+    initial: 'A',
+    generatedOTP: '',
+    coins: 150,
+    xp: 1250,
+    passedQuizzes: [] // Track which modules the user passed
+};
+
+// Friends list details with follow & chat options
+let friendsState = {
+    'Sarah Conner': { xp: 1100, followed: false, initialMsg: "Hey! Let's compete on the next logic sequence challenge!" },
+    'David Miller': { xp: 950, followed: false, initialMsg: "Nice to connect here! What coding level are you on?" },
+    'Emily Watson': { xp: 870, followed: false, initialMsg: "Hi! Did you finish the physics formulas module yet?" }
+};
+
+let activeChatFriend = null; // null means chatting with General Assistant Bot
+
+// Enrolled courses state (Dynamic)
+let enrolledCourses = {
+    "Python Essentials": "Excellent (95%)",
+    "Classical Physics Mechanics": "Needs Practice (60%)"
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    // --- DOM Elements ---
+    const pages = document.querySelectorAll('.page');
+    
+    // Forms
+    const emailForm = document.getElementById('email-form');
+    const otpForm = document.getElementById('otp-form');
+    const profileForm = document.getElementById('profile-form');
+    const feedbackForm = document.getElementById('feedback-form');
+    const contactForm = document.getElementById('contact-form');
+    const chatForm = document.getElementById('chat-form');
+    const addDoubtForm = document.getElementById('add-doubt-form');
+    const enrollCourseForm = document.getElementById('enroll-course-form');
+    const resumeBuilderForm = document.getElementById('resume-builder-form');
+    
+    // Inputs & Role selection
+    const emailInput = document.getElementById('email-input');
+    const otpInput = document.getElementById('otp-input');
+    const nameInput = document.getElementById('name-input');
+    const standardInput = document.getElementById('standard-input');
+    const subjectInput = document.getElementById('subject-input');
+    const roleRadios = document.getElementsByName('role');
+    const studentFields = document.getElementById('student-fields');
+    const teacherFields = document.getElementById('teacher-fields');
+    const feedbackText = document.getElementById('feedback-text');
+    const contactSubject = document.getElementById('contact-subject');
+    const contactMessage = document.getElementById('contact-message');
+    const chatInput = document.getElementById('chat-input');
+    const doubtInput = document.getElementById('doubt-input');
+    const courseSelect = document.getElementById('course-select');
+    const resumeSkills = document.getElementById('resume-skills');
+    const resumeProjects = document.getElementById('resume-projects');
+    
+    // UI Stats Panels
+    const coinCount = document.getElementById('coin-count');
+    const xpCount = document.getElementById('xp-count');
+    const navAvatar = document.getElementById('nav-avatar');
+    const drawerAvatar = document.getElementById('drawer-avatar');
+    const displayName = document.getElementById('display-name');
+    const displayStandard = document.getElementById('display-standard');
+    const leaderboardUserName = document.getElementById('leaderboard-user-name');
+    const leaderboardUserXP = document.getElementById('leaderboard-user-xp');
+    
+    // Detailed Profile Info elements in Drawer
+    const infoEmail = document.getElementById('info-email');
+    const infoRole = document.getElementById('info-role');
+    const infoQuizzesPassed = document.getElementById('info-quizzes-passed');
+
+    // Sub-grid dashboard stats elements
+    const dashboardSubStats = document.getElementById('dashboard-sub-stats');
+    const solvedCountStat = document.getElementById('solved-count-stat');
+    const badgeCountStat = document.getElementById('badge-count-stat');
+    const doubtsContainer = document.getElementById('doubts-container');
+
+    // Detail views
+    const categoriesGrid = document.getElementById('categories-grid');
+    const categoryDetail = document.getElementById('category-detail');
+    const detailList = document.getElementById('detail-list');
+    const backBtn = document.getElementById('back-btn');
+    const detailIcon = document.getElementById('detail-icon');
+    const detailTitle = document.getElementById('detail-title');
+
+    // Modals & Chatbot Toggles
+    const chatToggleBtn = document.getElementById('chat-toggle-btn');
+    const closeChatBtn = document.getElementById('close-chat-btn');
+    const chatbotWidget = document.getElementById('chatbot-widget');
+    const chatMessages = document.getElementById('chat-messages');
+    const chatChips = document.getElementById('chat-chips');
+    const feedbackModal = document.getElementById('feedback-modal');
+    const contactModal = document.getElementById('contact-modal');
+    const leaderboardModal = document.getElementById('leaderboard-modal');
+    const mycourseModal = document.getElementById('mycourse-modal');
+    const placementModal = document.getElementById('placement-modal');
+    
+    const drawerLeaderboardCard = document.getElementById('drawer-leaderboard-card');
+    const drawerFeedbackBtn = document.getElementById('drawer-feedback-btn');
+    const drawerContactBtn = document.getElementById('drawer-contact-btn');
+    const drawerMycourseBtn = document.getElementById('drawer-mycourse-btn');
+    const drawerPlacementBtn = document.getElementById('drawer-placement-btn');
+    
+    const closeFeedbackBtn = document.getElementById('close-feedback-btn');
+    const closeContactBtn = document.getElementById('close-contact-btn');
+    const closeLeaderboardBtn = document.getElementById('close-leaderboard-btn');
+    const closeMycourseBtn = document.getElementById('close-mycourse-btn');
+    const closePlacementBtn = document.getElementById('close-placement-btn');
+    const logoutBtn = document.getElementById('logout-btn');
+
+    // Placement Preparation tabs
+    const btnTabAptitude = document.getElementById('btn-tab-aptitude');
+    const btnTabInterview = document.getElementById('btn-tab-interview');
+    const btnTabResume = document.getElementById('btn-tab-resume');
+    const placementAptitudeSection = document.getElementById('placement-aptitude-section');
+    const placementInterviewSection = document.getElementById('placement-interview-section');
+    const placementResumeSection = document.getElementById('placement-resume-section');
+    const aptFeedback = document.getElementById('apt-feedback');
+    const generatedResumeBox = document.getElementById('generated-resume-box');
+
+    // --- State Update Helpers ---
+    function updateStats(coinGained = 0, xpGained = 0, quizPassedKey = null) {
+        userProfile.coins += coinGained;
+        userProfile.xp += xpGained;
+        
+        if (quizPassedKey && !userProfile.passedQuizzes.includes(quizPassedKey)) {
+            userProfile.passedQuizzes.push(quizPassedKey);
+        }
+
+        coinCount.textContent = userProfile.coins;
+        xpCount.textContent = `${userProfile.xp} XP`;
+        
+        // Update Drawer profile summaries
+        navAvatar.textContent = userProfile.initial;
+        drawerAvatar.textContent = userProfile.initial;
+        displayName.textContent = userProfile.name;
+        
+        if (userProfile.role === 'student') {
+            displayStandard.textContent = userProfile.standard || 'Student';
+        } else {
+            displayStandard.textContent = `Teacher: ${userProfile.subject || 'General'}`;
+        }
+
+        // Update Student Info Block
+        infoEmail.textContent = userProfile.email;
+        infoRole.textContent = userProfile.role.charAt(0).toUpperCase() + userProfile.role.slice(1);
+        infoQuizzesPassed.textContent = userProfile.passedQuizzes.length;
+        solvedCountStat.textContent = userProfile.passedQuizzes.length;
+
+        // Update Leaderboard user entry
+        if (leaderboardUserName && leaderboardUserXP) {
+            leaderboardUserName.textContent = userProfile.name;
+            leaderboardUserXP.textContent = `${userProfile.xp} XP`;
+        }
+
+        // Manage badge triggers based on progress milestones
+        let badgeCount = 1; // Default welcome badge
+        if (userProfile.xp >= 1300) {
+            document.getElementById('badge-polyglot').classList.remove('locked');
+            document.getElementById('badge-polyglot').classList.add('unlocked');
+            badgeCount++;
+        }
+        if (userProfile.xp >= 1400) {
+            document.getElementById('badge-scientist').classList.remove('locked');
+            document.getElementById('badge-scientist').classList.add('unlocked');
+            badgeCount++;
+        }
+        if (userProfile.xp >= 1500) {
+            document.getElementById('badge-coder').classList.remove('locked');
+            document.getElementById('badge-coder').classList.add('unlocked');
+            badgeCount++;
+        }
+        badgeCountStat.textContent = badgeCount;
+
+        // Dynamic Certificate Unlock triggers
+        const passedCoding = userProfile.passedQuizzes.some(q => ['c', 'cpp', 'python', 'java'].includes(q));
+        if (passedCoding) {
+            document.getElementById('cert-coding').classList.remove('locked');
+            document.getElementById('cert-coding').classList.add('unlocked');
+        }
+        const passedLang = userProfile.passedQuizzes.some(q => ['Spanish', 'French', 'German', 'Mandarin', 'Japanese'].includes(q));
+        if (passedLang) {
+            document.getElementById('cert-languages').classList.remove('locked');
+            document.getElementById('cert-languages').classList.add('unlocked');
+        }
+        const passedStem = userProfile.passedQuizzes.some(q => ['Engineering Mathematics', 'Engineering Physics', 'Engineering Chemistry', 'Core Mechanics'].includes(q));
+        if (passedStem) {
+            document.getElementById('cert-stem').classList.remove('locked');
+            document.getElementById('cert-stem').classList.add('unlocked');
+        }
+    }
+
+    // --- Navigation Helper ---
+    function navigateTo(pageId) {
+        pages.forEach(p => p.classList.remove('active'));
+        document.getElementById(pageId).classList.add('active');
+    }
+
+    // Initialize Splash Timer
+    setTimeout(() => { navigateTo('login'); }, 1500);
+
+    // --- Login & Setup Event Listeners ---
+    emailForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        userProfile.email = emailInput.value;
+        userProfile.generatedOTP = Math.floor(1000 + Math.random() * 9000).toString();
+
+        const templateParams = {
+            to_email: userProfile.email,
+            otp_code: userProfile.generatedOTP
+        };
+
+        emailjs.send('boddudavidraj1978@gmail.com', 'template_cjc0zde', templateParams)
+            .then(() => {
+                console.log('SUCCESS! OTP Email sent.');
+                alert(`OTP successfully sent to ${userProfile.email}! Please check your inbox.`);
+            }, (error) => {
+                console.log('FAILED...', error);
+                alert(`EmailJS Error. Fallback OTP is: ${userProfile.generatedOTP}`);
+            });
+
+        emailForm.classList.add('hidden');
+        otpForm.classList.remove('hidden');
+    });
+
+    otpForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (otpInput.value === userProfile.generatedOTP) {
+            navigateTo('profile-setup');
+        } else {
+            alert('Invalid OTP. Please try again.');
+        }
+    });
+
+    roleRadios.forEach(radio => {
+        radio.addEventListener('change', (e) => {
+            userProfile.role = e.target.value;
+            if (userProfile.role === 'teacher') {
+                studentFields.classList.add('hidden');
+                teacherFields.classList.remove('hidden');
+            } else {
+                studentFields.classList.remove('hidden');
+                teacherFields.classList.add('hidden');
+            }
+        });
+    });
+
+    profileForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        userProfile.name = nameInput.value || 'User';
+        userProfile.initial = userProfile.name.charAt(0).toUpperCase();
+
+        if (userProfile.role === 'student') {
+            userProfile.standard = standardInput.value || 'Student';
+        } else {
+            userProfile.subject = subjectInput.value || 'General';
+        }
+
+        updateStats(0, 0); // Trigger UI sync
+        navigateTo('main-app');
+    });
+
+    // --- Drawer Control Logic ---
+    const menuBtn = document.getElementById('menu-btn');
+    const closeDrawerBtn = document.getElementById('close-drawer-btn');
+    const dashboardDrawer = document.getElementById('dashboard-drawer');
+    const drawerOverlay = document.getElementById('drawer-overlay');
+
+    function closeDrawer() {
+        dashboardDrawer.classList.remove('open');
+        drawerOverlay.classList.remove('visible');
+    }
+
+    menuBtn.addEventListener('click', () => { 
+        dashboardDrawer.classList.add('open'); 
+        drawerOverlay.classList.add('visible'); 
+    });
+    closeDrawerBtn.addEventListener('click', closeDrawer);
+    drawerOverlay.addEventListener('click', closeDrawer);
+
+    // --- Simulated Database Loader UI helper ---
+    function executeDatabaseQuery(dbSource, dbAction, callback) {
+        detailList.innerHTML = `
+            <div class="spinner-container">
+                <div class="spinner"></div>
+                <div id="db-load-text" style="font-size:0.95rem; color:var(--text-muted);">Establishing connection to ${dbSource}...</div>
+            </div>
+            <div class="db-query-panel" id="query-log-panel">
+                <div class="db-query-header">
+                    <span class="mongodb-indicator">MongoDB: CONNECTED</span>
+                    <span class="supabase-indicator">Supabase: CONNECTED</span>
+                </div>
+                <div class="db-query-log" id="query-log-text"></div>
+            </div>
+        `;
+
+        const logPanel = document.getElementById('query-log-text');
+        const logs = [
+            `[System] Initializing handshake with remote ${dbSource} server...`,
+            `[${dbSource}] Executing request: ${dbAction}`,
+            `[${dbSource}] Reading records... Authenticating keys...`,
+            `[${dbSource}] Returned records successfully in ${Math.floor(Math.random() * 200 + 80)}ms.`
+        ];
+
+        let index = 0;
+        function printLog() {
+            if (index < logs.length) {
+                logPanel.innerHTML += logs[index] + '\n';
+                index++;
+                setTimeout(printLog, 200);
+            } else {
+                setTimeout(callback, 300);
+            }
+        }
+        setTimeout(printLog, 150);
+    }
+
+    // --- Category Details Routing ---
+    backBtn.addEventListener('click', () => {
+        categoryDetail.classList.add('hidden');
+        categoriesGrid.classList.remove('hidden');
+        dashboardSubStats.classList.remove('hidden'); // Show statistics dashboard again
+        detailList.className = 'list-container';
+        
+        const utils = document.getElementById('code-utils-header');
+        if(utils) utils.remove();
+    });
+
+    document.querySelectorAll('.category-card').forEach(card => {
+        card.addEventListener('click', () => {
+            const catKey = card.getAttribute('data-category');
+            openCategoryDetail(catKey);
+        });
+    });
+
+    function openCategoryDetail(catKey) {
+        categoriesGrid.classList.add('hidden');
+        dashboardSubStats.classList.add('hidden'); // Hide statistics dashboard inside details
+        categoryDetail.classList.remove('hidden');
+        detailList.innerHTML = '';
+        detailList.className = 'list-container ' + catKey + '-container'; 
+        
+        const utils = document.getElementById('code-utils-header');
+        if(utils) utils.remove();
+
+        if (catKey === 'coding') {
+            executeDatabaseQuery('Supabase', 'SELECT * FROM coding_languages ORDER BY difficulty', renderCoding);
+        } else if (catKey === 'languages') {
+            executeDatabaseQuery('MongoDB', 'db.languages.find({ active: true })', renderLanguages);
+        } else if (catKey === 'stem') {
+            executeDatabaseQuery('Supabase', 'SELECT * FROM stem_curriculum WHERE standard = "Engineering"', renderStem);
+        } else if (catKey === 'quizzes') {
+            executeDatabaseQuery('MongoDB & Supabase', 'Fetch mind_games & classroom_quizzes data', renderQuizzes);
+        }
+    }
+
+    // 💻 Coding Category
+    function renderCoding() {
+        detailIcon.textContent = '💻';
+        detailTitle.textContent = 'Coding Mastery';
+        
+        // Inject utility buttons
+        const codeUtils = document.createElement('div');
+        codeUtils.id = 'code-utils-header';
+        codeUtils.className = 'code-utils';
+        codeUtils.innerHTML = `
+            <button id="btn-compiler" class="btn primary glowing-btn sm-btn">⚙️ Compiler</button>
+            <button id="btn-practice" class="btn secondary sm-btn">🧠 Problem Solving</button>
+        `;
+        document.querySelector('.detail-header').appendChild(codeUtils);
+
+        // Bind compiler utilities
+        document.getElementById('btn-compiler').addEventListener('click', () => showInteractiveCompiler());
+        document.getElementById('btn-practice').addEventListener('click', () => alert('Welcome to the Problem Solving board! Real-world algorithmic challenges will load dynamically here.'));
+
+        const codingDatabase = {
+            levels: [
+                { id: 'c', title: 'C Programming', desc: 'The powerful procedural foundation.', concept: 'Pointers store the memory address of variables. Use the address-of operator (&) to fetch addresses.', q: 'Which operator dereferences a pointer variable in C?', options: ['&', '*', '->', '#'], a: '*' },
+                { id: 'cpp', title: 'C++ OOP', desc: 'Object-oriented performance powerhouse.', concept: 'Classes are blueprints for creating objects. Polymorphism allows methods to execute differently based on objects.', q: 'Which access specifier is default for C++ classes?', options: ['public', 'private', 'protected', 'internal'], a: 'private' },
+                { id: 'python', title: 'Python Basics', desc: 'The elegant language of AI and data.', concept: 'Python lists are dynamically sized collections that are mutable. You can add items using .append().', q: 'What is the runtime complexity of list append operations in Python?', options: ['O(1)', 'O(n)', 'O(log n)', 'O(n^2)'], a: 'O(1)' },
+                { id: 'java', title: 'Java Methods', desc: 'Robust, secure, and cross-platform.', concept: 'Methods are execution blocks. The main() method is public static void main(String[] args).', q: 'Which memory section is used to store objects in Java?', options: ['Stack', 'Heap', 'Register', 'Segment'], a: 'Heap' }
+            ]
+        };
+
+        codingDatabase.levels.forEach(level => {
+            const div = document.createElement('div');
+            div.className = 'mission-card fade-in';
+            div.innerHTML = `
+                <div class="mission-info">
+                    <h4>${level.title}</h4>
+                    <p>${level.desc}</p>
+                </div>
+                <button class="glowing-btn action-btn">LEARN</button>
+            `;
+            div.querySelector('.action-btn').addEventListener('click', () => openCodingConcept(level));
+            detailList.appendChild(div);
+        });
+    }
+
+    function openCodingConcept(level) {
+        detailList.innerHTML = '';
+        const block = document.createElement('div');
+        block.className = 'interactive-concept fade-in';
+        block.innerHTML = `
+            <h3>📚 ${level.title} Lesson</h3>
+            <div class="concept-box">
+                <p>${level.concept}</p>
+            </div>
+            
+            <div class="question-box">
+                <h4>Quiz Time!</h4>
+                <p>${level.q}</p>
+                <div class="options-grid">
+                    ${level.options.map(opt => `<button class="btn secondary option-btn">${opt}</button>`).join('')}
+                </div>
+                <p id="answer-feedback" class="feedback-text hidden"></p>
+            </div>
+            <button id="back-to-coding" class="btn primary glowing-btn" style="margin-top:20px;">Back to Coding Panel</button>
+        `;
+        detailList.appendChild(block);
+
+        const buttons = block.querySelectorAll('.option-btn');
+        const feedback = block.querySelector('#answer-feedback');
+        buttons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                buttons.forEach(b => b.classList.remove('selected'));
+                e.target.classList.add('selected');
+                feedback.classList.remove('hidden');
+                
+                if (e.target.textContent === level.a) {
+                    feedback.textContent = '✅ Correct! Brilliant +25 XP , +10 Coins';
+                    feedback.style.color = 'var(--success)';
+                    updateStats(10, 25, level.id);
+                } else {
+                    feedback.textContent = '❌ Incorrect. Read the concept above and try again!';
+                    feedback.style.color = 'var(--danger)';
+                }
+            });
+        });
+
+        document.getElementById('back-to-coding').addEventListener('click', () => {
+            openCategoryDetail('coding');
+        });
+    }
+
+    function showInteractiveCompiler() {
+        detailList.innerHTML = `
+            <div class="interactive-concept fade-in">
+                <h3>⚙️ Live Mock Compiler</h3>
+                <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:15px;">Write simple statements to check output.</p>
+                
+                <div class="input-group">
+                    <label>Compiler Language</label>
+                    <select id="compiler-lang">
+                        <option value="c">C (GCC 11)</option>
+                        <option value="cpp">C++ (G++ 17)</option>
+                        <option value="python">Python 3.10</option>
+                        <option value="java">Java 17</option>
+                    </select>
+                </div>
+                
+                <div class="input-group">
+                    <label>Source Code Editor</label>
+                    <textarea id="compiler-code" rows="8" style="width:100%; font-family:monospace; background:rgba(0,0,0,0.5); color:#22c55e; border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:12px; resize:none;">#include &lt;stdio.h&gt;\n\nint main() {\n    printf("Hello EduQuest!\\n");\n    return 0;\n}</textarea>
+                </div>
+                
+                <button id="run-compiler-btn" class="btn primary glowing-btn">Run Code</button>
+                
+                <div class="input-group" style="margin-top:20px;">
+                    <label>Terminal Output</label>
+                    <div id="compiler-output" style="background:#020617; border:1px solid #1e293b; color:#fff; border-radius:8px; padding:12px; min-height:80px; font-family:monospace; font-size:0.85rem; white-space:pre-wrap;">(Write code and click 'Run Code')</div>
+                </div>
+                
+                <button id="close-compiler-btn" class="btn secondary" style="margin-top:10px;">Back to Coding List</button>
+            </div>
+        `;
+
+        const compilerLang = document.getElementById('compiler-lang');
+        const compilerCode = document.getElementById('compiler-code');
+        const runBtn = document.getElementById('run-compiler-btn');
+        const outputBox = document.getElementById('compiler-output');
+
+        compilerLang.addEventListener('change', (e) => {
+            const lang = e.target.value;
+            if (lang === 'c') {
+                compilerCode.value = `#include <stdio.h>\n\nint main() {\n    printf("Hello EduQuest!\\n");\n    return 0;\n}`;
+            } else if (lang === 'cpp') {
+                compilerCode.value = `#include <iostream>\nusing namespace std;\n\nint main() {\n    cout << "Hello C++ World!" << endl;\n    return 0;\n}`;
+            } else if (lang === 'python') {
+                compilerCode.value = `print("Hello Python World!")\n# Try loops or variables\nx = 5\ny = 10\nprint(f"Result: {x + y}")`;
+            } else if (lang === 'java') {
+                compilerCode.value = `public class Main {\n    public static void main(String[] args) {\n        System.out.println("Hello Java World!");\n    }\n}`;
+            }
+        });
+
+        runBtn.addEventListener('click', () => {
+            outputBox.textContent = `Compiling code...\nLinking dependencies...\nExecuting output binary...\n\n`;
+            setTimeout(() => {
+                const code = compilerCode.value;
+                if (compilerLang.value === 'python') {
+                    if (code.includes('print(')) {
+                        outputBox.innerHTML += `Hello Python World!\nResult: 15\n\nProcess finished with exit code 0`;
+                    } else {
+                        outputBox.innerHTML += `Process finished with exit code 0`;
+                    }
+                } else if (compilerLang.value === 'c') {
+                    outputBox.innerHTML += `Hello EduQuest!\n\nProcess finished with exit code 0`;
+                } else if (compilerLang.value === 'cpp') {
+                    outputBox.innerHTML += `Hello C++ World!\n\nProcess finished with exit code 0`;
+                } else if (compilerLang.value === 'java') {
+                    outputBox.innerHTML += `Hello Java World!\n\nProcess finished with exit code 0`;
+                }
+            }, 800);
+        });
+
+        document.getElementById('close-compiler-btn').addEventListener('click', () => {
+            openCategoryDetail('coding');
+        });
+    }
+
+    // 🌍 Languages Category (MongoDB sourced details)
+    function renderLanguages() {
+        detailIcon.textContent = '🌍';
+        detailTitle.textContent = 'Global Languages';
+
+        const languagesContainer = document.createElement('div');
+        languagesContainer.className = 'duo-path';
+
+        const keys = Object.keys(mongodbDatabase.languages);
+        keys.forEach((langKey, index) => {
+            const data = mongodbDatabase.languages[langKey];
+            const isLeft = index % 2 === 0;
+            const nodeEl = document.createElement('div');
+            nodeEl.className = `duo-node fade-in duo-unlocked ${isLeft ? 'duo-left' : 'duo-right'}`;
+            nodeEl.innerHTML = `
+                <div class="duo-circle">${data.flag}</div>
+                <div class="duo-label">${langKey}</div>
+            `;
+            nodeEl.querySelector('.duo-circle').addEventListener('click', () => openLanguageModule(langKey, data));
+            languagesContainer.appendChild(nodeEl);
+        });
+
+        detailList.appendChild(languagesContainer);
+    }
+
+    function openLanguageModule(langName, data) {
+        detailList.innerHTML = '';
+        const card = document.createElement('div');
+        card.className = 'interactive-concept fade-in';
+        card.innerHTML = `
+            <h3>${data.flag} Learn ${langName}</h3>
+            
+            <div class="concept-box">
+                <h4>Grammar & Vocab rules:</h4>
+                <p>${data.concept}</p>
+            </div>
+
+            <div class="concept-box" style="border-left-color: var(--primary-glow);">
+                <h4>How to Learn effectively:</h4>
+                <p style="white-space: pre-line;">${data.roadmap}</p>
+            </div>
+
+            <div class="question-box">
+                <h4>Interactive Quiz:</h4>
+                <p>${data.question}</p>
+                <div class="options-grid">
+                    ${data.options.map(opt => `<button class="btn secondary option-btn">${opt}</button>`).join('')}
+                </div>
+                <p id="lang-feedback" class="feedback-text hidden"></p>
+            </div>
+
+            <button id="back-to-langs" class="btn primary glowing-btn" style="margin-top:20px;">Back to Languages</button>
+        `;
+
+        detailList.appendChild(card);
+
+        const buttons = card.querySelectorAll('.option-btn');
+        const feedback = card.querySelector('#lang-feedback');
+
+        buttons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                buttons.forEach(b => b.classList.remove('selected'));
+                e.target.classList.add('selected');
+                feedback.classList.remove('hidden');
+
+                if (e.target.textContent === data.answer) {
+                    feedback.textContent = '✅ Correct Answer! Excellent pronunciation check. +25 XP, +10 Coins';
+                    feedback.style.color = 'var(--success)';
+                    updateStats(10, 25, langName);
+                } else {
+                    feedback.textContent = '❌ Incorrect. Review the vocabulary rules above and try again.';
+                    feedback.style.color = 'var(--danger)';
+                }
+            });
+        });
+
+        document.getElementById('back-to-langs').addEventListener('click', () => {
+            openCategoryDetail('languages');
+        });
+    }
+
+    // 🔬 STEM Category (Supabase sourced roadmaps & quizzes)
+    function renderStem() {
+        detailIcon.textContent = '🔬';
+        detailTitle.textContent = 'Engineering Core';
+
+        const gridWrapper = document.createElement('div');
+        gridWrapper.className = 'brilliant-grid';
+
+        const keys = Object.keys(supabaseDatabase.stem);
+        keys.forEach(key => {
+            const data = supabaseDatabase.stem[key];
+            const card = document.createElement('div');
+            card.className = 'brilliant-card fade-in';
+            card.style.borderTop = `6px solid var(--primary-glow)`;
+            card.innerHTML = `
+                <div class="brilliant-icon" style="color: var(--primary-glow)">✥</div>
+                <h4>${key}</h4>
+                <p>${data.info.substring(0, 70)}...</p>
+            `;
+            card.addEventListener('click', () => openStemDetail(key, data));
+            gridWrapper.appendChild(card);
+        });
+
+        detailList.appendChild(gridWrapper);
+    }
+
+    function openStemDetail(title, data) {
+        detailList.innerHTML = '';
+        const view = document.createElement('div');
+        view.className = 'stem-deep-dive fade-in';
+        view.innerHTML = `
+            <h3>🔬 STEM Module: ${title}</h3>
+            
+            <div class="stem-section-card">
+                <h3>📖 What to Learn</h3>
+                <ul>
+                    ${data.what.map(item => `<li>${item}</li>`).join('')}
+                </ul>
+            </div>
+
+            <div class="stem-section-card">
+                <h3>💡 How to Learn</h3>
+                <p style="white-space: pre-line; line-height:1.6; font-size:0.95rem; color:var(--text-muted);">${data.how}</p>
+            </div>
+
+            <div class="stem-section-card">
+                <h3>📝 Detailed Information</h3>
+                <p style="line-height:1.6; font-size:0.95rem; color:var(--text-muted);">${data.info}</p>
+                <div class="stem-formula-panel">
+                    ${data.formula}
+                </div>
+            </div>
+
+            <!-- Quiz assessment section -->
+            <div class="stem-section-card" style="border: 1px solid var(--primary-glow); background: rgba(102, 252, 241, 0.03);">
+                <h3 style="color: var(--primary-glow);">📝 STEM Practice Quiz</h3>
+                <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:12px;">Solve the topic check below to earn rewards and unlock the subject certificate.</p>
+                <p style="font-weight:600; margin-bottom:10px;">Question: ${data.question}</p>
+                <div class="options-grid">
+                    ${data.options.map(opt => `<button class="btn secondary stem-quiz-opt">${opt}</button>`).join('')}
+                </div>
+                <p id="stem-quiz-feedback" class="feedback-text hidden" style="margin-top:10px;"></p>
+            </div>
+
+            <button id="back-to-stem" class="btn primary glowing-btn" style="margin-top:15px;">Back to STEM Subjects</button>
+        `;
+
+        detailList.appendChild(view);
+
+        const optionsBtns = view.querySelectorAll('.stem-quiz-opt');
+        const feedback = view.querySelector('#stem-quiz-feedback');
+
+        optionsBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                optionsBtns.forEach(b => b.classList.remove('selected'));
+                e.target.classList.add('selected');
+                feedback.classList.remove('hidden');
+
+                if (e.target.textContent === data.answer) {
+                    feedback.textContent = '✅ Correct! STEM Module Passed. Certificate Unlocked! +25 XP, +10 Coins';
+                    feedback.style.color = 'var(--success)';
+                    updateStats(10, 25, title);
+                } else {
+                    feedback.textContent = '❌ Incorrect. Review the guidelines and formulas above and try again.';
+                    feedback.style.color = 'var(--danger)';
+                }
+            });
+        });
+
+        document.getElementById('back-to-stem').addEventListener('click', () => {
+            openCategoryDetail('stem');
+        });
+    }
+
+    // 🎯 Quizzes Category (Mini-Games included)
+    function renderQuizzes() {
+        detailIcon.textContent = '🎯';
+        detailTitle.textContent = 'Quizzes & Challenges';
+
+        // Mind Games Sourced from databases
+        const mindGamesBlock = document.createElement('div');
+        mindGamesBlock.className = 'quiz-block fade-in open-block mind-games-special';
+        mindGamesBlock.innerHTML = `
+            <h3>🧠 Playable Mind Games (Database Fetched)</h3>
+            <p>Challenge cognitive logic, sequences, and pattern identification modules.</p>
+            <div class="mini-games-grid">
+                <button class="btn secondary mini-game-btn" id="start-memory-game-btn">🎴 Memory Matrix (MongoDB)</button>
+                <button class="btn secondary mini-game-btn" id="start-logic-game-btn">🔢 Logic Sequencer (Supabase)</button>
+            </div>
+        `;
+
+        // Classroom Quizzes (Role Gated)
+        const classroomBlock = document.createElement('div');
+        const isTeacher = userProfile.role === 'teacher';
+        classroomBlock.className = `quiz-block fade-in ${isTeacher ? 'open-block teacher-block' : 'locked-block'}`;
+        
+        if (isTeacher) {
+            classroomBlock.innerHTML = `
+                <h3>🏫 Host Classroom Quiz</h3>
+                <p>Welcome back, Teacher! Launch live tests, check student grades, or compile test sets.</p>
+                <button class="btn primary glowing-btn" onclick="alert('Creating session connection...')">Create Live Quiz Session</button>
+            `;
+        } else {
+            classroomBlock.innerHTML = `
+                <h3>🏫 Classroom Quizzes</h3>
+                <p>This section is locked. Only Teachers can host or launch a classroom quiz.</p>
+                <div class="lock-icon">🔒</div>
+                <button class="btn secondary" disabled>Waiting for Teacher...</button>
+            `;
+        }
+
+        detailList.appendChild(mindGamesBlock);
+        detailList.appendChild(classroomBlock);
+
+        // Bind interactive game click events
+        document.getElementById('start-memory-game-btn').addEventListener('click', startMemoryMatrixGame);
+        document.getElementById('start-logic-game-btn').addEventListener('click', startLogicSequencerGame);
+    }
+
+    // --- GAME 1: MEMORY MATRIX (MongoDB Sourced) ---
+    function startMemoryMatrixGame() {
+        detailList.innerHTML = '';
+        const gameContainer = document.createElement('div');
+        gameContainer.className = 'interactive-concept fade-in';
+        gameContainer.innerHTML = `
+            <h3>🎴 Memory Matrix</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:10px;">Memorize the glowing blocks and select them. Win rounds to gain points!</p>
+            <div id="game-status-bar" style="display:flex; justify-content:space-between; font-weight:bold; margin-bottom:10px;">
+                <span>Score: <span id="matrix-score">0</span></span>
+                <span>Round: <span id="matrix-round">1</span></span>
+            </div>
+            
+            <div class="memory-grid">
+                <div class="memory-tile" data-index="0"></div>
+                <div class="memory-tile" data-index="1"></div>
+                <div class="memory-tile" data-index="2"></div>
+                <div class="memory-tile" data-index="3"></div>
+                <div class="memory-tile" data-index="4"></div>
+                <div class="memory-tile" data-index="5"></div>
+                <div class="memory-tile" data-index="6"></div>
+                <div class="memory-tile" data-index="7"></div>
+                <div class="memory-tile" data-index="8"></div>
+            </div>
+            
+            <div style="display:flex; gap:10px; margin-top:20px;">
+                <button id="matrix-start-btn" class="btn primary glowing-btn">Start Game</button>
+                <button id="matrix-back-btn" class="btn secondary">Back to Quizzes</button>
+            </div>
+        `;
+        detailList.appendChild(gameContainer);
+
+        let score = 0;
+        let round = 1;
+        let activeTiles = [];
+        let playerClicks = [];
+        let gameActive = false;
+        let readyToClick = false;
+
+        const tiles = gameContainer.querySelectorAll('.memory-tile');
+        const startBtn = document.getElementById('matrix-start-btn');
+        const scoreSpan = document.getElementById('matrix-score');
+        const roundSpan = document.getElementById('matrix-round');
+
+        function startRound() {
+            playerClicks = [];
+            readyToClick = false;
+            activeTiles = [];
+            
+            const countToFlash = 2 + round;
+            while(activeTiles.length < countToFlash) {
+                const rand = Math.floor(Math.random() * 9);
+                if (!activeTiles.includes(rand)) activeTiles.push(rand);
+            }
+
+            let index = 0;
+            function flashNext() {
+                if (index < activeTiles.length) {
+                    const tile = tiles[activeTiles[index]];
+                    tile.classList.add('active');
+                    setTimeout(() => {
+                        tile.classList.remove('active');
+                        index++;
+                        setTimeout(flashNext, 250);
+                    }, 400);
+                } else {
+                    readyToClick = true;
+                }
+            }
+            setTimeout(flashNext, 500);
+        }
+
+        tiles.forEach(tile => {
+            tile.addEventListener('click', (e) => {
+                if (!gameActive || !readyToClick) return;
+                const index = parseInt(e.target.getAttribute('data-index'));
+
+                if (activeTiles.includes(index)) {
+                    if (!playerClicks.includes(index)) {
+                        playerClicks.push(index);
+                        e.target.classList.add('correct');
+                        setTimeout(() => e.target.classList.remove('correct'), 300);
+
+                        if (playerClicks.length === activeTiles.length) {
+                            score += 10 * round;
+                            scoreSpan.textContent = score;
+                            round++;
+                            roundSpan.textContent = round;
+                            readyToClick = false;
+                            
+                            updateStats(5, 10, 'memory_matrix');
+                            alert(`Excellent! Proceeding to Round ${round}. (+10 XP, +5 Coins)`);
+                            setTimeout(startRound, 600);
+                        }
+                    }
+                } else {
+                    e.target.classList.add('wrong');
+                    gameActive = false;
+                    readyToClick = false;
+                    alert(`Wrong block! Game Over. Final Score: ${score}. You earned +25 XP!`);
+                    updateStats(0, 25);
+                    tiles.forEach(t => t.classList.remove('wrong', 'correct', 'active'));
+                    startBtn.textContent = 'Restart Game';
+                    startBtn.style.display = 'block';
+                    round = 1;
+                    score = 0;
+                }
+            });
+        });
+
+        startBtn.addEventListener('click', () => {
+            gameActive = true;
+            scoreSpan.textContent = '0';
+            roundSpan.textContent = '1';
+            startBtn.style.display = 'none';
+            startRound();
+        });
+
+        document.getElementById('matrix-back-btn').addEventListener('click', () => {
+            openCategoryDetail('quizzes');
+        });
+    }
+
+    // --- GAME 2: LOGIC SEQUENCER (Supabase Sourced) ---
+    function startLogicSequencerGame() {
+        detailList.innerHTML = '';
+        const gameContainer = document.createElement('div');
+        gameContainer.className = 'interactive-concept fade-in';
+        gameContainer.innerHTML = `
+            <h3>🔢 Logic Sequencer</h3>
+            <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:10px;">Solve the mathematical patterns from Supabase database rows. Correct answers earn XP & Coins.</p>
+            
+            <div id="logic-game-status" style="display:flex; justify-content:space-between; font-weight:bold; margin-bottom:10px;">
+                <span>Completed: <span id="logic-stage">0</span> / 5</span>
+                <span>Reward Pool: <span id="logic-rewards">50 Coins</span></span>
+            </div>
+
+            <div class="sequencer-card" id="logic-card">2, 4, 8, 16, ?</div>
+
+            <div class="input-group">
+                <label>Enter the next number in sequence:</label>
+                <input type="text" id="logic-answer" placeholder="Your Answer" style="width:100%; text-align:center; font-size:1.2rem; font-weight:bold;" />
+            </div>
+
+            <button id="logic-submit-btn" class="btn primary glowing-btn">Verify Pattern</button>
+            <p id="logic-feedback" class="quiz-feedback"></p>
+
+            <button id="logic-back-btn" class="btn secondary" style="margin-top:20px;">Back to Quizzes</button>
+        `;
+        detailList.appendChild(gameContainer);
+
+        const logicSequences = [
+            { seq: '2, 4, 8, 16, ?', ans: '32', clue: 'Doubling pattern (2^n).' },
+            { seq: '1, 3, 6, 10, 15, ?', ans: '21', clue: 'Triangular sequence (+2, +3, +4, +5, +6).' },
+            { seq: '1, 1, 2, 3, 5, 8, ?', ans: '13', clue: 'Fibonacci pattern (Add previous two).' },
+            { seq: '1, 4, 9, 16, 25, ?', ans: '36', clue: 'Perfect squares (n^2).' },
+            { seq: '2, 3, 5, 7, 11, ?', ans: '13', clue: 'Prime numbers sequence.' }
+        ];
+
+        let stageIndex = 0;
+
+        const logicCard = document.getElementById('logic-card');
+        const answerInput = document.getElementById('logic-answer');
+        const submitBtn = document.getElementById('logic-submit-btn');
+        const feedbackText = document.getElementById('logic-feedback');
+        const stageSpan = document.getElementById('logic-stage');
+
+        function loadStage() {
+            if (stageIndex < logicSequences.length) {
+                logicCard.textContent = logicSequences[stageIndex].seq;
+                answerInput.value = '';
+                feedbackText.textContent = '';
+                stageSpan.textContent = stageIndex;
+            } else {
+                logicCard.textContent = '🎉 MISSION ACCOMPLISHED';
+                answerInput.style.display = 'none';
+                submitBtn.style.display = 'none';
+                feedbackText.textContent = 'Excellent logical deductions! You completed all patterns. (+50 Coins, +100 XP)';
+                feedbackText.style.color = 'var(--success)';
+                updateStats(50, 100, 'logic_sequencer');
+            }
+        }
+
+        submitBtn.addEventListener('click', () => {
+            const guess = answerInput.value.trim();
+            const current = logicSequences[stageIndex];
+
+            if (guess === current.ans) {
+                feedbackText.textContent = `Correct! ${current.clue} (+10 XP)`;
+                feedbackText.style.color = 'var(--success)';
+                updateStats(0, 10);
+                stageIndex++;
+                setTimeout(loadStage, 1200);
+            } else {
+                feedbackText.textContent = 'Incorrect pattern deduction. Try again!';
+                feedbackText.style.color = 'var(--danger)';
+            }
+        });
+
+        loadStage();
+
+        document.getElementById('logic-back-btn').addEventListener('click', () => {
+            openCategoryDetail('quizzes');
+        });
+    }
+
+    // --- LEADERBOARD MODALS & TABS ---
+    const tabBtns = leaderboardModal.querySelectorAll('.tab-btn');
+    const tabContent = document.getElementById('leaderboard-tab-content');
+
+    drawerLeaderboardCard.addEventListener('click', () => {
+        leaderboardModal.classList.remove('hidden');
+        closeDrawer();
+        renderLeaderboardTab('global'); // default tab
+    });
+
+    closeLeaderboardBtn.addEventListener('click', () => {
+        leaderboardModal.classList.add('hidden');
+    });
+
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            tabBtns.forEach(t => t.classList.remove('active'));
+            e.target.classList.add('active');
+            const tabName = e.target.getAttribute('data-tab');
+            renderLeaderboardTab(tabName);
+        });
+    });
+
+    function renderLeaderboardTab(tabName) {
+        tabContent.innerHTML = '';
+        if (tabName === 'global') {
+            const globalData = [
+                { rank: 1, name: userProfile.name + ' (You)', xp: userProfile.xp, me: true },
+                { rank: 2, name: 'Sarah Conner', xp: friendsState['Sarah Conner'].xp, me: false },
+                { rank: 3, name: 'David Miller', xp: friendsState['David Miller'].xp, me: false },
+                { rank: 4, name: 'Emily Watson', xp: friendsState['Emily Watson'].xp, me: false },
+                { rank: 5, name: 'Marcus Aurelius', xp: 720, me: false }
+            ];
+            
+            globalData.sort((a,b) => b.xp - a.xp);
+            globalData.forEach((item, idx) => {
+                const el = document.createElement('div');
+                el.className = `leaderboard-item ${item.me ? 'current-user' : ''}`;
+                el.innerHTML = `
+                    <span class="rank">${idx + 1}</span>
+                    <span class="name">${item.name}</span>
+                    <span class="score">${item.xp} XP</span>
+                `;
+                tabContent.appendChild(el);
+            });
+        } else if (tabName === 'local') {
+            const localData = [
+                { rank: 1, name: userProfile.name + ' (You)', xp: userProfile.xp, me: true },
+                { rank: 2, name: 'Sarah Conner', xp: friendsState['Sarah Conner'].xp, me: false },
+                { rank: 3, name: 'David Miller', xp: friendsState['David Miller'].xp, me: false }
+            ];
+            localData.sort((a,b) => b.xp - a.xp);
+            localData.forEach((item, idx) => {
+                const el = document.createElement('div');
+                el.className = `leaderboard-item ${item.me ? 'current-user' : ''}`;
+                el.innerHTML = `
+                    <span class="rank">${idx + 1}</span>
+                    <span class="name">${item.name}</span>
+                    <span class="score">${item.xp} XP</span>
+                `;
+                tabContent.appendChild(el);
+            });
+        } else if (tabName === 'friends') {
+            const friends = Object.keys(friendsState);
+            friends.forEach((friendName) => {
+                const details = friendsState[friendName];
+                const row = document.createElement('div');
+                row.className = 'leaderboard-item friend-row';
+                row.innerHTML = `
+                    <div class="friend-meta">
+                        <div class="user-avatar" style="width:28px; height:28px; font-size:0.75rem;">${friendName.charAt(0)}</div>
+                        <span><strong>${friendName}</strong> (${details.xp} XP)</span>
+                    </div>
+                    <div class="friend-actions">
+                        <button class="friend-btn follow ${details.followed ? 'following' : ''}" data-friend="${friendName}">
+                            ${details.followed ? 'Following' : 'Follow'}
+                        </button>
+                        <button class="friend-btn chat" data-friend="${friendName}">Chat</button>
+                    </div>
+                `;
+                
+                row.querySelector('.follow').addEventListener('click', (e) => {
+                    const name = e.target.getAttribute('data-friend');
+                    friendsState[name].followed = !friendsState[name].followed;
+                    if (friendsState[name].followed) {
+                        e.target.textContent = 'Following';
+                        e.target.classList.add('following');
+                    } else {
+                        e.target.textContent = 'Follow';
+                        e.target.classList.remove('following');
+                    }
+                });
+
+                row.querySelector('.chat').addEventListener('click', (e) => {
+                    const name = e.target.getAttribute('data-friend');
+                    initiateFriendDirectChat(name);
+                });
+
+                tabContent.appendChild(row);
+            });
+        }
+    }
+
+    function initiateFriendDirectChat(friendName) {
+        leaderboardModal.classList.add('hidden');
+        chatbotWidget.classList.remove('hidden');
+        activeChatFriend = friendName;
+
+        document.querySelector('.chat-header h3').textContent = `💬 Chat: ${friendName}`;
+
+        chatMessages.innerHTML = `
+            <div class="chat-message bot" style="border-left-color:var(--secondary-glow); font-style:italic; font-size:0.8rem; background:rgba(192,38,211,0.05);">
+                📲 Direct Message Channel established with ${friendName}. You can now send messages and follow up!
+            </div>
+            <div class="chat-message bot">${friendsState[friendName].initialMsg}</div>
+        `;
+    }
+
+    // --- DOUBTS FORUM LOGIC ---
+    addDoubtForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const doubtText = doubtInput.value.trim();
+        if (!doubtText) return;
+
+        // Add user doubt to list
+        const thread = document.createElement('div');
+        thread.className = 'doubt-thread fade-in';
+        thread.innerHTML = `<strong>You:</strong> ${doubtText}`;
+        doubtsContainer.appendChild(thread);
+        doubtsContainer.scrollTop = doubtsContainer.scrollHeight;
+        
+        doubtInput.value = '';
+
+        // Auto system response reply
+        setTimeout(() => {
+            const reply = document.createElement('div');
+            reply.className = 'reply';
+            reply.innerHTML = `<strong>System AI:</strong> Great query! We compiled this doubt into the MongoDB registry. Our community helpers or teachers will respond soon.`;
+            thread.appendChild(reply);
+            doubtsContainer.scrollTop = doubtsContainer.scrollHeight;
+        }, 900);
+    });
+
+    // --- MY COURSES & GRADES LOGIC ---
+    function renderEnrolledCourses() {
+        const enrolledCoursesList = document.getElementById('enrolled-courses-list');
+        enrolledCoursesList.innerHTML = '';
+        
+        const courses = Object.keys(enrolledCourses);
+        if (courses.length === 0) {
+            enrolledCoursesList.innerHTML = `<p style="color:var(--text-muted); font-size:0.85rem; text-align:center;">No enrolled courses yet. Select above and enroll!</p>`;
+            return;
+        }
+
+        courses.forEach(c => {
+            const grade = enrolledCourses[c];
+            const div = document.createElement('div');
+            div.className = 'leaderboard-item';
+            div.style.justifyContent = 'space-between';
+            div.innerHTML = `
+                <span>📚 <strong>${c}</strong></span>
+                <span class="score" style="color:var(--primary-glow);">${grade}</span>
+            `;
+            enrolledCoursesList.appendChild(div);
+        });
+    }
+
+    enrollCourseForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const courseName = courseSelect.value;
+        if (!courseName) return;
+
+        if (enrolledCourses[courseName]) {
+            alert('You are already enrolled in this course!');
+            return;
+        }
+
+        enrolledCourses[courseName] = "In Progress";
+        renderEnrolledCourses();
+        courseSelect.value = '';
+        alert(`Successfully enrolled in ${courseName}!`);
+    });
+
+    // --- PLACEMENT PREPARATION HUB LOGIC ---
+    // Tab Toggles
+    btnTabAptitude.addEventListener('click', () => togglePlacementTab('aptitude'));
+    btnTabInterview.addEventListener('click', () => togglePlacementTab('interview'));
+    btnTabResume.addEventListener('click', () => togglePlacementTab('resume'));
+
+    function togglePlacementTab(tab) {
+        btnTabAptitude.classList.remove('active');
+        btnTabInterview.classList.remove('active');
+        btnTabResume.classList.remove('active');
+        
+        placementAptitudeSection.classList.add('hidden');
+        placementInterviewSection.classList.add('hidden');
+        placementResumeSection.classList.add('hidden');
+
+        if (tab === 'aptitude') {
+            btnTabAptitude.classList.add('active');
+            placementAptitudeSection.classList.remove('hidden');
+        } else if (tab === 'interview') {
+            btnTabInterview.classList.add('active');
+            placementInterviewSection.classList.remove('hidden');
+        } else if (tab === 'resume') {
+            btnTabResume.classList.add('active');
+            placementResumeSection.classList.remove('hidden');
+        }
+    }
+
+    // Aptitude Option Click Check
+    const aptBtns = placementAptitudeSection.querySelectorAll('.apt-opt-btn');
+    aptBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            aptBtns.forEach(b => b.classList.remove('selected'));
+            e.target.classList.add('selected');
+            aptFeedback.classList.remove('hidden');
+
+            if (e.target.textContent === '150 meters') {
+                aptFeedback.textContent = '✅ Correct! Explanation: Speed = 60 * (5/18) m/s = 50/3 m/s. Length = Speed * Time = (50/3) * 9 = 150 meters.';
+                aptFeedback.style.color = 'var(--success)';
+                updateStats(10, 20, 'aptitude_check');
+            } else {
+                aptFeedback.textContent = '❌ Incorrect. Hint: Convert speed to m/s by multiplying with 5/18. Try again!';
+                aptFeedback.style.color = 'var(--danger)';
+            }
+        });
+    });
+
+    // Resume Compiler
+    resumeBuilderForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const skills = resumeSkills.value.trim();
+        const projects = resumeProjects.value.trim();
+
+        generatedResumeBox.classList.remove('hidden');
+        generatedResumeBox.textContent = `
+======================================================
+               EDUQUEST MOCK RESUME
+======================================================
+NAME:       ${userProfile.name}
+EMAIL:      ${userProfile.email}
+GRADE:      ${userProfile.standard}
+RANK:       #1 (Silicon Valley local region)
+SCORE:      ${userProfile.xp} XP
+
+------------------ TECHNICAL SKILLS ------------------
+${skills}
+
+------------------ ACADEMIC PROJECTS -----------------
+${projects}
+
+------------------ CREDENTIALS -----------------------
+Certificates Earned: ${document.querySelectorAll('.cert-item.unlocked').length} certificates
+Achievements Level: Level 5 Explorer (Gamified Badge)
+======================================================
+        `.trim();
+    });
+
+    // --- DRAWER ACTION BUTTONS MODALS BINDINGS ---
+    drawerMycourseBtn.addEventListener('click', () => {
+        mycourseModal.classList.remove('hidden');
+        renderEnrolledCourses();
+        closeDrawer();
+    });
+
+    drawerPlacementBtn.addEventListener('click', () => {
+        placementModal.classList.remove('hidden');
+        togglePlacementTab('aptitude');
+        closeDrawer();
+    });
+
+    closeMycourseBtn.addEventListener('click', () => {
+        mycourseModal.classList.add('hidden');
+    });
+
+    closePlacementBtn.addEventListener('click', () => {
+        placementModal.classList.add('hidden');
+    });
+
+    // --- CHATBOT GENERAL ASSISTANT LOGIC ---
+    chatToggleBtn.addEventListener('click', () => {
+        chatbotWidget.classList.toggle('hidden');
+        if (chatbotWidget.classList.contains('hidden')) {
+            activeChatFriend = null;
+            document.querySelector('.chat-header h3').textContent = '🤖 EduQuest Assistant';
+        }
+    });
+
+    closeChatBtn.addEventListener('click', () => {
+        chatbotWidget.classList.add('hidden');
+        activeChatFriend = null;
+        document.querySelector('.chat-header h3').textContent = '🤖 EduQuest Assistant';
+    });
+
+    const chatbotResponses = {
+        mathematics: "In STEM Mathematics, focus on understanding Calculus derivatives (rate of change) and integrals (area under curves). A key formula is Newton's difference quotient: f'(x) = lim(h->0) [f(x+h)-f(x)]/h.",
+        physics: "Engineering Physics centers on Thermodynamics laws and Electromagnetism. The conservation of energy equation is dU = dQ - dW.",
+        chemistry: "Engineering Chemistry details covalent bonds and battery reaction dynamics. Try mastering Gibbs Free Energy equation: ΔG = ΔH - TΔS.",
+        coding: "EduQuest supports C, C++, Python, and Java. Python lists are mutable arrays with O(1) appends. C++ uses private variables for OOP data encapsulation.",
+        spanish: "Learn Spanish greetings: Hello is 'Hola', Good morning is 'Buenos días'. Practicing speaking aloud is the best way to retain conjugations!",
+        hello: "Hi there! I am your EduQuest AI. Ask me about STEM subjects, programming, languages, or checking your status!",
+        xp: `You currently hold ${userProfile.xp} XP points. Keep completing quizzes to climb the leaderboards!`,
+        default: "I can help with STEM, Languages, Coding, or checking your stats. Try typing a keyword like 'Math', 'Physics', 'Coding', or 'XP'!"
+    };
+
+    function processBotResponse(messageText) {
+        const query = messageText.toLowerCase();
+
+        if (activeChatFriend) {
+            let reply = `That sounds awesome! Let's keep studying together and top the ${userProfile.standard} local leaderboard.`;
+            if (query.includes('math') || query.includes('physics') || query.includes('stem')) {
+                reply = "STEM quizzes are tough! I've been reviewing Hooke's stress/strain laws. What did you get on the quiz?";
+            } else if (query.includes('hello') || query.includes('hi') || query.includes('hey')) {
+                reply = `Hey! Good to chat here. I'm trying to unlock my next badge. How many quizzes have you passed?`;
+            } else if (query.includes('code') || query.includes('coding') || query.includes('c++') || query.includes('python')) {
+                reply = "Coding is fun! I ran the compiler tool earlier for Python. Let's practice some problem solving together.";
+            }
+
+            setTimeout(() => {
+                appendChatMessage(reply, 'bot');
+            }, 700);
+            return;
+        }
+
+        let reply = chatbotResponses.default;
+        if (query.includes('math')) reply = chatbotResponses.mathematics;
+        else if (query.includes('physics')) reply = chatbotResponses.physics;
+        else if (query.includes('chemistry')) reply = chatbotResponses.chemistry;
+        else if (query.includes('code') || query.includes('coding') || query.includes('program')) reply = chatbotResponses.coding;
+        else if (query.includes('spanish') || query.includes('language')) reply = chatbotResponses.spanish;
+        else if (query.includes('hello') || query.includes('hi')) reply = chatbotResponses.hello;
+        else if (query.includes('xp') || query.includes('level') || query.includes('score')) {
+            reply = `You currently hold ${userProfile.xp} XP points. Keep completing quizzes to climb the leaderboards!`;
+        }
+
+        setTimeout(() => {
+            appendChatMessage(reply, 'bot');
+        }, 600);
+    }
+
+    // Direct chat message rendering helper
+    function appendChatMessage(text, sender) {
+        const msg = document.createElement('div');
+        msg.className = `chat-message ${sender}`;
+        msg.textContent = text;
+        chatMessages.appendChild(msg);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    chatForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const text = chatInput.value.trim();
+        if (!text) return;
+
+        appendChatMessage(text, 'user');
+        chatInput.value = '';
+        processBotResponse(text);
+    });
+
+    chatChips.querySelectorAll('.chip').forEach(chip => {
+        chip.addEventListener('click', (e) => {
+            const query = e.target.getAttribute('data-query');
+            appendChatMessage(query, 'user');
+            processBotResponse(query);
+        });
+    });
+
+    // --- MODALS (FEEDBACK & CONTACT) LOGIC ---
+    drawerFeedbackBtn.addEventListener('click', () => {
+        feedbackModal.classList.remove('hidden');
+        closeDrawer();
+    });
+
+    drawerContactBtn.addEventListener('click', () => {
+        contactModal.classList.remove('hidden');
+        closeDrawer();
+    });
+
+    closeFeedbackBtn.addEventListener('click', () => {
+        feedbackModal.classList.add('hidden');
+    });
+
+    closeContactBtn.addEventListener('click', () => {
+        contactModal.classList.add('hidden');
+    });
+
+    feedbackForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Feedback submitted successfully! MongoDB collection "user_feedbacks" updated.');
+        feedbackText.value = '';
+        feedbackModal.classList.add('hidden');
+    });
+
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Support message sent successfully! Ticket registered in Supabase.');
+        contactSubject.value = '';
+        contactMessage.value = '';
+        contactModal.classList.add('hidden');
+    });
+
+    // --- LOGOUT LOGIC ---
+    logoutBtn.addEventListener('click', () => {
+        const confirmLogout = confirm('Are you sure you want to log out of EduQuest?');
+        if (confirmLogout) {
+            closeDrawer();
+            
+            // Reset state
+            userProfile.email = 'student@example.com';
+            userProfile.name = 'Alex Johnson';
+            userProfile.generatedOTP = '';
+            userProfile.passedQuizzes = [];
+            activeChatFriend = null;
+            document.querySelector('.chat-header h3').textContent = '🤖 EduQuest Assistant';
+
+            // Clean inputs
+            emailInput.value = '';
+            otpInput.value = '';
+            
+            // Show email form, hide OTP form
+            emailForm.classList.remove('hidden');
+            otpForm.classList.add('hidden');
+
+            // Reset certificates styling
+            document.querySelectorAll('.cert-item').forEach(c => {
+                c.classList.add('locked');
+                c.classList.remove('unlocked');
+            });
+
+            // Route to login screen
+            navigateTo('login');
+        }
+    });
+
+    // Initial Stats Load
+    updateStats(0, 0);
+
+});
