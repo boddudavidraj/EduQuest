@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speed Insights Test</title>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@vercel/speed-insights@1.0.10/dist/index.mjs"></script>
+</head>
+<body>
+    <h1>Testing Vercel Speed Insights</h1>
+    <p>Check browser console for Speed Insights initialization.</p>
+    
+    <script type="module">
+        import { injectSpeedInsights } from 'https://cdn.jsdelivr.net/npm/@vercel/speed-insights@1.0.10/dist/index.mjs';
+        
+        console.log('Attempting to inject Speed Insights...');
+        const insights = injectSpeedInsights();
+        console.log('Speed Insights injected:', insights);
+        
+        // The library will log to console if debug mode is enabled
+        // In production, it sends data to Vercel's analytics endpoint
+    </script>
+</body>
+</html>
