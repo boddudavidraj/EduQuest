@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduQuest - Gamified Learning</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- SPLASH SCREEN -->
+        <div id="splash" class="page active">
+            <h1 class="logo-title pulse">Gamified Education</h1>
+            <p class="subtitle fade-in">Welcome to EduQuest</p>
+        </div>
+
+        <!-- LOGIN SCREEN -->
+        <div id="login" class="page">
+            <div class="glass-card">
+                <h2>Login to EduQuest</h2>
+                
+                <!-- Email Form -->
+                <form id="email-form">
+                    <p>Enter your email to continue</p>
+                    <div class="input-group">
+                        <input type="email" id="email-input" placeholder="student@example.com" required />
+                    </div>
+                    <button type="submit" class="btn primary glowing-btn">Submit</button>
+                </form>
+
+                <!-- OTP Form (Hidden Initially) -->
+                <form id="otp-form" class="hidden">
+                    <p>Enter the 4-digit OTP sent to your email.</p>
+                    <div class="input-group">
+                        <input type="text" id="otp-input" placeholder="1234" maxlength="4" required />
+                    </div>
+                    <button type="submit" class="btn primary glowing-btn">Verify OTP</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- PROFILE SETUP -->
+        <div id="profile-setup" class="page">
+            <div class="glass-card">
+                <h2>Setup Your Profile</h2>
+                <p>Customize your EduQuest avatar identity</p>
+                <form id="profile-form">
+                    
+                    <div class="input-group">
+                        <label>Select Your Role</label>
+                        <div class="role-options" style="display: flex; gap: 1rem; align-items: center; margin-top: 0.5rem;">
+                            <label style="cursor: pointer;"><input type="radio" name="role" value="student" checked> Student</label>
+                            <label style="cursor: pointer;"><input type="radio" name="role" value="teacher"> Teacher</label>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="name-input">Full Name</label>
+                        <input type="text" id="name-input" placeholder="e.g. Alex Johnson" required />
+                    </div>
+
+                    <!-- Student Specific -->
+                    <div class="input-group" id="student-fields">
+                        <label for="standard-input">Standard / Year</label>
+                        <select id="standard-input">
+                            <option value="">Select your Grade/Year</option>
+                            <option value="6th Grade">6th Grade</option>
+                            <option value="7th Grade">7th Grade</option>
+                            <option value="8th Grade">8th Grade</option>
+                            <option value="9th Grade">9th Grade</option>
+                            <option value="10th Grade">10th Grade</option>
+                            <option value="11th Grade">11th Grade</option>
+                            <option value="12th Grade">12th Grade</option>
+                            <option value="Engineering 1st Year">Engineering 1st Year</option>
+                            <option value="Engineering 2nd Year">Engineering 2nd Year</option>
+                            <option value="Engineering 3rd Year">Engineering 3rd Year</option>
+                            <option value="Engineering 4th Year">Engineering 4th Year</option>
+                        </select>
+                    </div>
+
+                    <!-- Teacher Specific -->
+                    <div class="input-group hidden" id="teacher-fields">
+                        <label for="subject-input">Subject Taught</label>
+                        <input type="text" id="subject-input" placeholder="e.g. Mathematics" />
+                    </div>
+
+                    <button type="submit" class="btn primary glowing-btn">Enter EduQuest</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- MAIN APP -->
+        <div id="main-app" class="page">
+            <!-- Navbar -->
+            <header class="topbar">
+                <button id="menu-btn" class="hamburger">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </button>
+                <h1 class="brand-name">EduQuest</h1>
+                <div class="top-stats">
+                    <span class="stat-badge coin-badge">💰 <span id="coin-count">150</span></span>
+                    <span class="stat-badge xp-badge">⭐ <span id="xp-count">1250 XP</span></span>
+                    <button id="chat-toggle-btn" class="stat-badge chat-badge" style="cursor: pointer; background: rgba(102, 252, 241, 0.1); border-color: var(--primary-glow); color: var(--primary-glow);">💬 Chat</button>
+                    <div class="user-avatar" id="nav-avatar">A</div>
+                </div>
+            </header>
+
+            <!-- Dashboard Drawer -->
+            <div id="dashboard-drawer" class="drawer">
+                <div class="drawer-content">
+                    <div class="drawer-header">
+                        <h2>Dashboard</h2>
+                        <button id="close-drawer-btn" class="close-btn">&times;</button>
+                    </div>
+                    
+                    <div class="user-profile-summary">
+                        <div class="big-avatar" id="drawer-avatar">A</div>
+                        <h3 id="display-name">Student Name</h3>
+                        <p id="display-standard">Grade</p>
+                        <div class="level-progress">
+                            <div class="level-text"><span>Level 5</span> <span class="right">Next: Lvl 6</span></div>
+                            <div class="progress-bar-container"><div class="progress-bar-fill" style="width: 65%;"></div></div>
+                        </div>
+                    </div>
+
+                    <!-- Student Information Card -->
+                    <div class="user-info-card" id="user-info-card">
+                        <div class="info-item">role<strong>📧 Email:</strong> <span id="info-email">-</span></div>
+                        <div class="info-item"><strong>👤 Role:</strong> <span id="info-role">Student</span></div>
+                        <div class="info-item"><strong>📍 Region:</strong> <span>Silicon Valley</span></div>
+                        <div class="info-item"><strong>📝 Quizzes Passed:</strong> <span id="info-quizzes-passed">0</span></div>
+                    </div>
+
+                    <div class="dashboard-widgets scrollable">
+                        <!-- Leaderboard Widget -->
+                        <div class="widget-card leaderboard-widget" id="drawer-leaderboard-card" style="cursor: pointer;">
+                            <h4>🏆 Leaderboard (Click to Expand)</h4>
+                            <div class="leaderboard-list">
+                                <div class="leaderboard-item current-user">
+                                    <span class="rank">1</span>
+                                    <span class="name" id="leaderboard-user-name">Alex Johnson</span>
+                                    <span class="score" id="leaderboard-user-xp">1250 XP</span>
+                                </div>
+                                <div class="leaderboard-item">
+                                    <span class="rank">2</span>
+                                    <span class="name">Sarah Conner</span>
+                                    <span class="score">1100 XP</span>
+                                </div>
+                                <div class="leaderboard-item">
+                                    <span class="rank">3</span>
+                                    <span class="name">David Miller</span>
+                                    <span class="score">950 XP</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Badges Locker Widget -->
+                        <div class="widget-card badges-widget">
+                            <h4>🎖️ Badges Locker</h4>
+                            <div class="badges-grid">
+                                <div class="badge-item unlocked" id="badge-welcome" title="Welcome: Logged into EduQuest successfully">🌱</div>
+                                <div class="badge-item locked" id="badge-polyglot" title="Polyglot: Complete a Language Quiz">🌍</div>
+                                <div class="badge-item locked" id="badge-scientist" title="STEM Explorer: Complete a STEM deep-dive module">🔬</div>
+                                <div class="badge-item locked" id="badge-coder" title="Code Architect: Solve a Coding Concept Quiz">💻</div>
+                            </div>
+                        </div>
+
+                        <!-- Certificates Widget -->
+                        <div class="widget-card certificates-widget">
+                            <h4>🎓 Earned Certificates</h4>
+                            <div class="certificates-grid">
+                                <div class="cert-item locked" id="cert-coding" title="Coding Certificate: Score points in coding">📜 Coding</div>
+                                <div class="cert-item locked" id="cert-languages" title="Languages Certificate: Score points in languages">📜 Lang</div>
+                                <div class="cert-item locked" id="cert-stem" title="STEM Excellence Certificate: Score points in STEM">📜 STEM</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Footer Controls -->
+                    <div class="drawer-footer">
+                        <button id="drawer-mycourse-btn" class="footer-btn">📚 My Courses</button>
+                        <button id="drawer-placement-btn" class="footer-btn">💼 Placement Prep</button>
+                        <button id="drawer-feedback-btn" class="footer-btn">💬 Feedback</button>
+                        <button id="drawer-contact-btn" class="footer-btn">📞 Support</button>
+                        <button id="logout-btn" class="btn logout-btn">🚪 Logout</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Drawer Overlay -->
+            <div id="drawer-overlay" class="overlay"></div>
+
+            <!-- Main Content Area -->
+            <main class="main-content">
+                <!-- Grid View -->
+                <div id="categories-grid" class="category-grid">
+                    <div class="category-card" data-category="coding">
+                        <div class="card-icon">💻</div>
+                        <h3>Coding</h3>
+                        <p>Master languages like C, Python, Java & more.</p>
+                        <div class="card-footer"><span>5 Modules</span> <span>Explore &rarr;</span></div>
+                    </div>
+                    <div class="category-card" data-category="languages">
+                        <div class="card-icon">🌍</div>
+                        <h3>Languages</h3>
+                        <p>Learn global languages: English, French, Arabic...</p>
+                        <div class="card-footer"><span>5 Modules</span> <span>Explore &rarr;</span></div>
+                    </div>
+                    <div class="category-card" data-category="quizzes">
+                        <div class="card-icon">🎯</div>
+                        <h3>Quizzes</h3>
+                        <p>Challenge yourself in Classroom, Teams, or Debut.</p>
+                        <div class="card-footer"><span>3 Modes</span> <span>Explore &rarr;</span></div>
+                    </div>
+                    <div class="category-card" data-category="stem">
+                        <div class="card-icon">🔬</div>
+                        <h3>STEM</h3>
+                        <p>Dive deep into Science and Mathematics.</p>
+                        <div class="card-footer"><span>2 Topics</span> <span>Explore &rarr;</span></div>
+                    </div>
+                </div>
+
+                <!-- Dashboard Sub-grid Stats Section (Under Categories Grid) -->
+                <div id="dashboard-sub-stats" class="sub-grid-stats fade-in">
+                    <div class="stats-cards-row">
+                        <div class="stat-card streak-card">
+                            <span class="stat-icon">🔥</span>
+                            <div class="stat-info">
+                                <h3>5 Days</h3>
+                                <p>Streak</p>
+                            </div>
+                        </div>
+                        <div class="stat-card solved-card">
+                            <span class="stat-icon">✅</span>
+                            <div class="stat-info">
+                                <h3 id="solved-count-stat">0</h3>
+                                <p>Solved</p>
+                            </div>
+                        </div>
+                        <div class="stat-card badge-stat-card">
+                            <span class="stat-icon">🏆</span>
+                            <div class="stat-info">
+                                <h3 id="badge-count-stat">1</h3>
+                                <p>Badges</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="doubts-performance-row">
+                        <div class="stat-widget doubts-widget">
+                            <h3>💬 Doubts & Discussions</h3>
+                            <div class="doubts-container" id="doubts-container">
+                                <div class="doubt-thread">
+                                    <strong>David Raj:</strong> How does the C++ virtual destructor prevent memory leak?
+                                    <div class="reply"><strong>System:</strong> It ensures that the derived class destructor is called when deleting via a base class pointer.</div>
+                                </div>
+                            </div>
+                            <form id="add-doubt-form" class="add-doubt-form">
+                                <input type="text" id="doubt-input" placeholder="Type your doubt..." required />
+                                <button type="submit" class="btn primary sm-btn">Post</button>
+                            </form>
+                        </div>
+
+                        <div class="stat-widget performance-widget">
+                            <h3>📊 Exam Performance</h3>
+                            <div class="performance-bars">
+                                <div class="perf-bar-item">
+                                    <span>Coding:</span>
+                                    <div class="bar-bg"><div class="bar-fill" style="width: 90%; background: #38bdf8;"></div></div>
+                                    <span>90%</span>
+                                </div>
+                                <div class="perf-bar-item">
+                                    <span>Languages:</span>
+                                    <div class="bar-bg"><div class="bar-fill" style="width: 85%; background: #f472b6;"></div></div>
+                                    <span>85%</span>
+                                </div>
+                                <div class="perf-bar-item">
+                                    <span>STEM Checks:</span>
+                                    <div class="bar-bg"><div class="bar-fill" style="width: 78%; background: #34d399;"></div></div>
+                                    <span>78%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detail View (Hidden by default) -->
+                <div id="category-detail" class="detail-view hidden">
+                    <button id="back-btn" class="btn secondary back-btn">&larr; Back to Subjects</button>
+                    <div class="detail-header">
+                        <div class="detail-icon" id="detail-icon"></div>
+                        <h2 id="detail-title">Category Info</h2>
+                    </div>
+                    <div class="list-container" id="detail-list">
+                        <!-- Items rendered dynamically via JS -->
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- CHATBOT WIDGET -->
+    <div id="chatbot-widget" class="chatbot-widget hidden">
+        <div class="chat-header">
+            <h3>🤖 EduQuest Assistant</h3>
+            <button id="close-chat-btn" class="close-chat-btn">&times;</button>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <div class="chat-message bot">Hello! I am your EduQuest AI learning assistant. How can I help you today?</div>
+        </div>
+        <div class="chat-chips" id="chat-chips">
+            <button class="chip" data-query="How to study Mathematics?">Math Guide</button>
+            <button class="chip" data-query="Explain C++ Classes">C++ Help</button>
+            <button class="chip" data-query="Translate Hello to Spanish">Spanish Basic</button>
+        </div>
+        <form class="chat-input-area" id="chat-form">
+            <input type="text" id="chat-input" placeholder="Type a message..." autocomplete="off" required />
+            <button type="submit" class="chat-send-btn">Send</button>
+        </form>
+    </div>
+
+    <!-- FEEDBACK MODAL -->
+    <div id="feedback-modal" class="modal hidden">
+        <div class="modal-content glass-card">
+            <span class="modal-close" id="close-feedback-btn">&times;</span>
+            <h2>Send Feedback</h2>
+            <p>Tell us what you think! We appreciate your suggestions.</p>
+            <form id="feedback-form">
+                <div class="input-group">
+                    <label for="feedback-text">Message</label>
+                    <textarea id="feedback-text" rows="4" placeholder="Your experience, bug reports, or suggestions..." required style="width: 100%; padding: 10px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; resize: none;"></textarea>
+                </div>
+                <button type="submit" class="btn primary glowing-btn">Submit Feedback</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- CONTACT SUPPORT MODAL -->
+    <div id="contact-modal" class="modal hidden">
+        <div class="modal-content glass-card">
+            <span class="modal-close" id="close-contact-btn">&times;</span>
+            <h2>Contact Support</h2>
+            <p>Need help? Reach out to us and we'll get back to you shortly.</p>
+            <div style="text-align: left; margin-bottom: 1.5rem; line-height: 1.6; font-size: 0.9rem; background: rgba(0,0,0,0.2); padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+                <p>📧 <strong>Email:</strong> support@eduquest.com</p>
+                <p>📞 <strong>Phone:</strong> +1 (555) 019-2834</p>
+                <p>🏢 <strong>Office:</strong> EduQuest HQ, Silicon Valley</p>
+            </div>
+            <form id="contact-form">
+                <div class="input-group">
+                    <input type="text" id="contact-subject" placeholder="Subject" required />
+                </div>
+                <div class="input-group">
+                    <textarea id="contact-message" rows="3" placeholder="How can we help you?" required style="width: 100%; padding: 10px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; resize: none;"></textarea>
+                </div>
+                <button type="submit" class="btn primary glowing-btn">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- LEADERBOARD DETAILS MODAL -->
+    <div id="leaderboard-modal" class="modal hidden">
+        <div class="modal-content glass-card" style="max-width: 500px;">
+            <span class="modal-close" id="close-leaderboard-btn">&times;</span>
+            <h2>🏆 Leaderboards</h2>
+            <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:15px;">Compare points globally, locally, or with your friends.</p>
+            <div class="leaderboard-tabs">
+                <button class="tab-btn active" data-tab="global">Global</button>
+                <button class="tab-btn" data-tab="local">Local</button>
+                <button class="tab-btn" data-tab="friends">Friends</button>
+            </div>
+            <div class="leaderboard-tab-content scrollable" id="leaderboard-tab-content" style="max-height: 250px; margin-top: 15px; text-align: left; display: flex; flex-direction: column; gap: 8px;">
+                <!-- Populated dynamically via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- MY COURSES MODAL -->
+    <div id="mycourse-modal" class="modal hidden">
+        <div class="modal-content glass-card" style="max-width: 500px;">
+            <span class="modal-close" id="close-mycourse-btn">&times;</span>
+            <h2>📚 My Courses & Grades</h2>
+            <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:15px;">Enroll in academic courses and view your topic performance grades.</p>
+            
+            <form id="enroll-course-form" style="display:flex; gap:10px; margin-bottom:20px;">
+                <select id="course-select" required style="flex:1; padding:8px 12px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.1); color:white; border-radius:8px;">
+                    <option value="">-- Choose a Course to Add --</option>
+                    <option value="Python Essentials">Python Essentials</option>
+                    <option value="Data Structures & Algorithms">Data Structures & Algorithms</option>
+                    <option value="Engineering Mathematics">Engineering Mathematics</option>
+                    <option value="French Vocabulary & Accent">French Vocabulary & Accent</option>
+                    <option value="Classical Physics Mechanics">Classical Physics Mechanics</option>
+                </select>
+                <button type="submit" class="btn primary glowing-btn sm-btn">Enroll</button>
+            </form>
+
+            <h4 style="color:var(--primary-glow); margin-bottom:10px; text-align:left;">Enrolled Courses</h4>
+            <div id="enrolled-courses-list" style="text-align:left; max-height:160px; overflow-y:auto; display:flex; flex-direction:column; gap:8px; margin-bottom:15px;">
+                <!-- Dynamic courses -->
+            </div>
+        </div>
+    </div>
+
+    <!-- PLACEMENT PREPARATION HUB MODAL -->
+    <div id="placement-modal" class="modal hidden">
+        <div class="modal-content glass-card" style="max-width: 550px;">
+            <span class="modal-close" id="close-placement-btn">&times;</span>
+            <h2>💼 Placement Prep Hub</h2>
+            <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:15px;">Crack aptitude rounds, study interview questions, and build your resume.</p>
+            
+            <div class="leaderboard-tabs" style="margin-bottom: 15px;">
+                <button class="tab-btn active" id="btn-tab-aptitude" style="font-size:0.8rem; padding:8px;">Aptitude</button>
+                <button class="tab-btn" id="btn-tab-interview" style="font-size:0.8rem; padding:8px;">Technical Q&A</button>
+                <button class="tab-btn" id="btn-tab-resume" style="font-size:0.8rem; padding:8px;">Resume Builder</button>
+            </div>
+
+            <!-- Aptitude Section -->
+            <div id="placement-aptitude-section" class="placement-section">
+                <p style="font-weight:600; text-align:left; margin-bottom:8px;">Mock Quantitative Aptitude Check:</p>
+                <p style="text-align:left; font-size:0.95rem; margin-bottom:12px; line-height:1.4;">"A train running at the speed of 60 km/hr crosses a pole in 9 seconds. What is the length of the train?"</p>
+                <div class="options-grid" style="grid-template-columns:1fr 1fr;">
+                    <button class="btn secondary apt-opt-btn">120 meters</button>
+                    <button class="btn secondary apt-opt-btn">150 meters</button>
+                    <button class="btn secondary apt-opt-btn">324 meters</button>
+                    <button class="btn secondary apt-opt-btn">180 meters</button>
+                </div>
+                <p id="apt-feedback" class="feedback-text hidden" style="margin-top:10px;"></p>
+            </div>
+
+            <!-- Technical Q&A Section -->
+            <div id="placement-interview-section" class="placement-section hidden" style="text-align:left; max-height:220px; overflow-y:auto; display:flex; flex-direction:column; gap:10px;">
+                <div class="concept-box" style="margin: 0; padding:10px;">
+                    <strong>Q: What is Object-Oriented Programming (OOP)?</strong>
+                    <p style="font-size:0.85rem; color:var(--text-muted); margin-top:4px;">OOP is a paradigm based on "objects", which contain data and methods. Key principles are Inheritance, Encapsulation, Polymorphism, and Abstraction.</p>
+                </div>
+                <div class="concept-box" style="margin: 0; padding:10px; border-left-color: var(--secondary-glow);">
+                    <strong>Q: Difference between pointer and reference in C++?</strong>
+                    <p style="font-size:0.85rem; color:var(--text-muted); margin-top:4px;">Pointers store addresses and can be reassigned or null. References are aliases, cannot be reassigned, and cannot be null.</p>
+                </div>
+            </div>
+
+            <!-- Resume Builder Section -->
+            <div id="placement-resume-section" class="placement-section hidden">
+                <form id="resume-builder-form" style="text-align:left; display:flex; flex-direction:column; gap:8px;">
+                    <div class="input-group" style="margin-bottom:8px;">
+                        <label>Technical Skills</label>
+                        <input type="text" id="resume-skills" placeholder="e.g. C, C++, Python, HTML, CSS" required style="padding:8px 12px;" />
+                    </div>
+                    <div class="input-group" style="margin-bottom:8px;">
+                        <label>Major Projects</label>
+                        <input type="text" id="resume-projects" placeholder="e.g. E-Commerce Website, Chat Application" required style="padding:8px 12px;" />
+                    </div>
+                    <button type="submit" class="btn primary glowing-btn">Compile & Generate Resume</button>
+                </form>
+                <div id="generated-resume-box" class="hidden" style="margin-top:12px; background:#020617; border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:12px; font-family:monospace; text-align:left; white-space:pre-wrap; font-size:0.8rem; color:#fff;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add script at bottom -->
+    <script src="app.js"></script>
+</body>
+</html>
